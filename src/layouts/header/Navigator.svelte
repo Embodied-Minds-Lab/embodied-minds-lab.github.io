@@ -4,39 +4,18 @@
 			position: relative;
 			display: inline-block;
 
-			p,
-			span {
+			p {
 				padding: 5px 10px;
 				text-align: center;
+				color: var(--primary-color);
+				background-color: transparent;
+				transition: color 0.15s ease, background-color 0.15s ease;
 			}
 
-			span {
-				position: absolute;
-				top: 0px;
-				width: 100%;
-				height: 100%;
-				border-bottom: 2px solid transparent;
-
-				transition: border-color 0.15s ease;
-			}
-
-			p {
-				color: var(--background-color);
-				background-color: var(--primary-color);
-
-				clip-path: inset(0 100% 0 0);
-				transition: clip-path 0.15s ease;
-			}
-
-			&.location {
-				span {
-					border-color: var(--secondary-color);
-				}
-			}
-
-			&:hover {
+			&:hover, &.location {
 				p {
-					clip-path: inset(0 0 0 0);
+					color: var(--background-color);
+					background-color: var(--primary-color);
 				}
 			}
 		}
@@ -72,23 +51,8 @@
 					display: flex;
 					gap: 0.5rem;
 
-					span,
 					p {
 						padding: 0px;
-					}
-
-					span {
-						position: static;
-						width: auto;
-
-						display: inline-flex;
-						align-items: center;
-
-						border-bottom: none;
-						color: var(--primary-color);
-					}
-
-					p {
 						white-space: nowrap;
 
 						clip-path: none;
@@ -121,19 +85,15 @@
 		<button onclick={() => (menu = false)} class="sm:hidden">{@render close()}</button>
 
 		<a href={getRelativeLocaleUrl(locale)} class:location={route == getRelativeLocaleUrl(locale) || route.startsWith(getRelativeLocaleUrl(locale, "/preface"))}>
-			<span>{@render home()}</span>
 			<p>{t("navigation.home")}</p>
 		</a>
 		<a href={getRelativeLocaleUrl(locale, "/note")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/note"))}>
-			<span>{@render note()}</span>
 			<p>{t("navigation.note")}</p>
 		</a>
 		<a href={getRelativeLocaleUrl(locale, "/jotting")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/jotting"))}>
-			<span>{@render jotting()}</span>
 			<p>{t("navigation.jotting")}</p>
 		</a>
 		<a href={getRelativeLocaleUrl(locale, "/about")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/about"))}>
-			<span>{@render about()}</span>
 			<p>{t("navigation.about")}</p>
 		</a>
 	</header>
