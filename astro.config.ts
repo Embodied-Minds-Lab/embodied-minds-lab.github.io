@@ -39,7 +39,7 @@ export default defineConfig({
   site: "https://thought-lite.vercel.app",
   trailingSlash: "never",
   i18n: {
-    locales: ["en", "zh-cn", "ja"],
+    locales: ["en"],
     defaultLocale: "en",
     routing: {
       redirectToDefaultLocale: false,
@@ -136,6 +136,7 @@ export default defineConfig({
           "arrow-right",
           "arrow-up-to-line",
           "at-sign",
+          "book-open",
           "calendar",
           "circle-alert",
           "circle-check",
@@ -149,6 +150,7 @@ export default defineConfig({
           "feather",
           "file-search",
           "flag-triangle-right",
+          "globe",
           "hash",
           "history",
           "house",
@@ -156,6 +158,7 @@ export default defineConfig({
           "layers",
           "list",
           "log-out",
+          "mail",
           "message-square",
           "moon",
           "pencil",

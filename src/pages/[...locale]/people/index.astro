@@ -1,0 +1,214 @@
+---
+import { i18n } from "astro:config/client";
+import Base from "$layouts/Base.astro";
+import i18nit from "$i18n";
+import Icon from "$components/Icon.astro";
+
+export async function getStaticPaths() {
+	return i18n!.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+}
+
+const { locale = i18n!.defaultLocale } = Astro.params;
+const t = i18nit(locale);
+
+// Define people data
+const people = [
+	{
+		name: "Yilun Du",
+		position: "Principal Investigator",
+		image: "/people/yilundu.jpg",
+		bio: "Yilun Du is a researcher interested in robotics.",
+		links: {
+			website: "https://yilundu.github.io/",
+			email: "ydu@seas.harvard.edu",
+			twitter: "https://twitter.com/du_yilun",
+			scholar: "https://scholar.google.com/citations?user=GRMMc_MAAAAJ&hl=en",
+			github: "https://scholar.google.com/citations?user=GRMMc_MAAAAJ&hl=en"
+		}
+	},
+	{
+		name: "Amani Kiruga",
+		position: "PhD Student",
+		image: "/people/amani.jpg",
+		bio: "Amani Kiruga is a researcher interested in robotics.",
+		links: {
+			website: "https://amanikiruga.github.io/",
+			email: "yilun@example.com",
+			twitter: "https://twitter.com/yilundu",
+			scholar: "https://scholar.google.com/citations?user=example",
+			github: "https://github.com/yilundu"
+		}
+	},
+	{
+		name: "Zhenting Qi",
+		position: "PhD Student",
+		image: "/people/zhentingqi.jpg",
+		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		links: {
+			website: "https://zhentingqi.github.io/",
+			email: "zhentingqi@g.harvard.edu",
+			twitter: "https://x.com/ZhentingQi",
+			scholar: "https://scholar.google.com/citations?hl=en&user=WZ00HCUAAAAJ",
+			github: "https://github.com/zhentingqi"
+		}
+	},
+	{
+		name: "Haldun Balim",
+		position: "PhD Student",
+		image: "/people/haldun.jpg",
+		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		links: {
+			website: "https://haldunbalim.github.io",
+			email: "hbalim@fas.harvard.edu",
+			scholar: "https://scholar.google.com/citations?user=ELPn5DsAAAAJ&hl=en&oi=ao",
+		}
+	},
+	{
+		name: "Zhiyi Li",
+		position: "PhD Student",
+		image: "/people/zhiyili.jpg",
+		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		links: {
+			email: "zhiyi24@mit.edu",
+			scholar: "https://scholar.google.com/citations?user=example",
+		}
+	},
+    {
+		name: "Sarah Liaw",
+		position: "PhD Student",
+		image: "/people/sarah.jpg",
+		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		links: {
+			website: "https://sarahliaw.github.io",
+			email: "sliaw@g.harvard.edu",
+			scholar: "https://scholar.google.com/citations?user=4sjEdTMAAAAJ&hl=en",
+			github: "https://github.com/SarahLiaw"
+		}
+	},
+	{
+		name: "Haoyu Xiong",
+		position: "PhD Student",
+		image: "/people/haoyuxiong.jpg",
+		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		links: {
+			website: "https://haoyu-x.github.io/",
+			email: "haoyux2@mit.edu",
+			twitter: "https://x.com/intent/follow?original_referer=https%3A%2F%2Fhaoyu-x.github.io%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5EHaoyu_Xiong_&screen_name=Haoyu_Xiong_",
+			scholar: "https://scholar.google.com/citations?user=iGfCCEYAAAAJ&hl=en&oi=ao",
+			github: "https://github.com/haoyu-x"
+		}
+	},
+	{
+		name: "Hang Le",
+		position: "PhD Student",
+		image: "/people/hangle.jpg",
+		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		links: {
+			website: "https://kempnerinstitute.harvard.edu/people/our-people/hang-le/",
+			scholar: "https://scholar.google.com/citations?user=ILbi7n4AAAAJ&hl=en",
+		}
+	},
+];
+---
+
+<style lang="less">
+	.people-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.person-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 1.5rem;
+		border-radius: 8px;
+		transition: transform 0.2s ease;
+		position: relative;
+		z-index: 1;
+		
+		&:hover {
+			transform: translateY(-4px);
+			z-index: 1001;
+			
+			.person-bio {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+
+	.person-image {
+		width: 200px;
+		height: 200px;
+		border-radius: 8px;
+		object-fit: cover;
+		margin-bottom: 1rem;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.person-name {
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin-bottom: 0.25rem;
+	}
+
+	.person-position {
+		font-size: 1rem;
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+		font-style: italic;
+	}
+
+	.person-links {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-top: auto;
+	}
+
+	.link-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		border-radius: 4px;
+		background-color: var(--primary-color);
+		color: var(--background-color);
+		transition: transform 0.2s ease, background-color 0.2s ease;
+		
+		&:hover {
+			transform: scale(1.1);
+			background-color: var(--primary-color);
+			opacity: 0.9;
+		}
+	}
+</style>
+
+<Base title={t("navigation.people")} {locale}>
+	<main class="flex flex-col grow">
+	<h1>{t("navigation.people")}</h1>
+		<div class="people-grid">
+			{people.map(person => (
+				<div class="person-card">
+					<img src={person.image} alt={person.name} class="person-image" />
+					<h2 class="person-name">{person.name}</h2>
+					<p class="person-position">{person.position}</p>
+					<div class="person-links">
+						{person.links.website && <a href={person.links.website} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="Website" title="Website"><Icon name="lucide:globe" size={16} inline /></a>}
+						{person.links.email && <a href={`mailto:${person.links.email}`} class="link-icon" aria-label="Email" title="Email"><Icon name="lucide:mail" size={16} inline /></a>}
+						{person.links.twitter && <a href={person.links.twitter} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="Twitter" title="Twitter"><Icon name="simple-icons:x" size={16} inline /></a>}
+						{person.links.scholar && <a href={person.links.scholar} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="Google Scholar" title="Google Scholar"><Icon name="lucide:book-open" size={16} inline /></a>}
+						{person.links.github && <a href={person.links.github} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="GitHub" title="GitHub"><Icon name="simple-icons:github" size={16} inline /></a>}
+					</div>
+				</div>
+			))}
+		</div>
+	</main>
+</Base>
+
