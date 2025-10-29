@@ -1,0 +1,117 @@
+---
+import { i18n } from "astro:config/client";
+import { getCollection } from "astro:content";
+import Base from "$layouts/Base.astro";
+import i18nit from "$i18n";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+    return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+}
+
+const { locale = i18n!.defaultLocale } = Astro.params;
+
+const t = i18nit(locale);
+
+const information = await getCollection("information", information => {
+    const [, id] = information.id.split("/");
+    information.id = id;
+    return true;
+});
+
+let contact = information.find(info => info.id == "join-header");
+let collaborations = information.find(info => info.id == "join-collaborations");
+let phdStudents = information.find(info => info.id == "join-phd-students");
+let postdocs = information.find(info => info.id == "join-postdocs");
+let harvardMitStudents = information.find(info => info.id == "join-harvard-mit-students");
+let visitingResearchers = information.find(info => info.id == "join-visiting-researchers");
+
+const { Content: Contact } = contact ? await render(contact) : ({} as any);
+const { Content: Collaborations } = collaborations ? await render(collaborations) : ({} as any);
+const { Content: PhDStudents } = phdStudents ? await render(phdStudents) : ({} as any);
+const { Content: Postdocs } = postdocs ? await render(postdocs) : ({} as any);
+const { Content: HarvardMitStudents } = harvardMitStudents ? await render(harvardMitStudents) : ({} as any);
+const { Content: VisitingResearchers } = visitingResearchers ? await render(visitingResearchers) : ({} as any);
+---
+
+<style lang="less">
+    article {
+        div {
+            margin-bottom: 2rem;
+
+            h1 {
+                margin-bottom: 1rem;
+
+                font-size: 1.8rem;
+            }
+        }
+    }
+</style>
+
+<Base title="Contact" {locale}>
+    <main class="flex flex-col">
+        <article class="flex flex-col">
+            {
+                contact && (
+                    <div>
+                        <samp class="markdown">
+                            <Contact />
+                        </samp>
+                    </div>
+                )
+            }
+            {
+                collaborations && (
+                    <div>
+                        <h1>Collaborations</h1>
+                        <samp class="markdown">
+                            <Collaborations />
+                        </samp>
+                    </div>
+                )
+            }
+            {
+                phdStudents && (
+                    <div>
+                        <h1>PhD Students</h1>
+                        <samp class="markdown">
+                            <PhDStudents />
+                        </samp>
+                    </div>
+                )
+            }
+            {
+                postdocs && (
+                    <div>
+                        <h1>Postdocs</h1>
+                        <samp class="markdown">
+                            <Postdocs />
+                        </samp>
+                    </div>
+                )
+            }
+            {
+                harvardMitStudents && (
+                    <div>
+                        <h1>Harvard/MIT Students</h1>
+                        <samp class="markdown">
+                            <HarvardMitStudents />
+                        </samp>
+                    </div>
+                )
+            }
+            {
+                visitingResearchers && (
+                    <div>
+                        <h1>Visiting Researchers</h1>
+                        <samp class="markdown">
+                            <VisitingResearchers />
+                        </samp>
+                    </div>
+                )
+            }
+        </article>
+    </main>
+</Base>
+
+

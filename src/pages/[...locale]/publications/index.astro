@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import { i18n } from "astro:config/client";
+import Base from "$layouts/Base.astro";
+import Publication from "$components/publications/Publication.svelte";
+import Icon from "$components/Icon.astro";
+import i18nit from "$i18n";
+
+export async function getStaticPaths() {
+	// Create path for each locale, omitting default locale from URL
+	return i18n!.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+}
+
+const { locale = i18n!.defaultLocale } = Astro.params;
+
+const t = i18nit(locale);
+
+const publications = await getCollection("publications", publication => !publication.data.draft);
+
+// Standardize publication structure
+let list = publications.map(publication => ({
+	id: publication.id,
+	data: {
+		title: publication.data.title,
+		authors: publication.data.authors,
+		venue: publication.data.venue,
+		year: publication.data.year,
+		tags: publication.data.tags,
+		link: publication.data.link,
+		doi: publication.data.doi
+	}
+}));
+
+// Extract all unique venues, years, and tags from the filtered publications
+const venues = Array.from(new Set(publications.map(pub => pub.data.venue).filter(Boolean))).sort();
+const years = Array.from(new Set(publications.map(pub => pub.data.year))).sort((a, b) => b - a);
+const tags = Array.from(new Set(publications.flatMap(pub => pub.data.tags).filter(Boolean))).sort();
+---
+
+<Base title={t("navigation.publications") || "Publications"} {locale}>
+	<main class="flex flex-col grow">
+		<Publication client:load {locale} publications={list} {venues} {years} {tags}>
+			<Icon name="lucide:arrow-left" slot="left" />
+			<Icon name="lucide:arrow-right" slot="right" />
+			<Icon name="lucide:ellipsis" slot="dots" />
+		</Publication>
+	</main>
+</Base>
+

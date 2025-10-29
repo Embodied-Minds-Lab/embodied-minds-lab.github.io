@@ -6,6 +6,7 @@
 
 			p {
 				padding: 5px 10px;
+				font-size: 1.1rem;
 				text-align: center;
 				color: var(--primary-color);
 				background-color: transparent;
@@ -30,6 +31,7 @@
 
 					p {
 						padding: 0px;
+							font-size: 1.1rem;
 						white-space: nowrap;
 
 						clip-path: none;
@@ -51,23 +53,20 @@
 <div role="button" onclick={() => (menu = false)} class:pointer-events-none={!menu} class:bg-transparent={!menu} class="fixed top-0 left-0 w-screen h-screen pointer-events-auto bg-#aaaaaa88 transition-background-color sm:hidden"></div>
 
 <nav bind:this={navigator} class:transform-translate-x-full={!menu} class="fixed top-0 right-0 flex flex-col justify-between items-start gap-5 p-5 bg-background h-full sm:contents overflow-hidden transition-transform">
-	<header class="grid gap-5 c-secondary grid-rows-[repeat(6,1fr)] sm:(grid-rows-none grid-cols-[repeat(5,1fr)])">
+    <header class="grid gap-5 c-secondary grid-rows-[repeat(5,1fr)] sm:(grid-rows-none grid-cols-[repeat(4,1fr)])">
 		<button onclick={() => (menu = false)} class="sm:hidden">{@render close()}</button>
 
 		<a href={getRelativeLocaleUrl(locale)} class:location={route == getRelativeLocaleUrl(locale) || route.startsWith(getRelativeLocaleUrl(locale, "/preface"))}>
 			<p>{t("navigation.home")}</p>
 		</a>
-		<a href={getRelativeLocaleUrl(locale, "/note")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/note"))}>
-			<p>{t("navigation.note")}</p>
-		</a>
-		<a href={getRelativeLocaleUrl(locale, "/jotting")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/jotting"))}>
-			<p>{t("navigation.jotting")}</p>
-		</a>
-		<a href={getRelativeLocaleUrl(locale, "/people")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/people"))}>
-			<p>{t("navigation.people")}</p>
-		</a>
-		<a href={getRelativeLocaleUrl(locale, "/about")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/about"))}>
-			<p>{t("navigation.about")}</p>
+        <a href={getRelativeLocaleUrl(locale, "/publications")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/publications"))}>
+            <p>{t("navigation.publications") || "Publications"}</p>
+        </a>
+        <a href={getRelativeLocaleUrl(locale, "/people")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/people"))}>
+            <p>{t("navigation.people")}</p>
+        </a>
+        <a href={getRelativeLocaleUrl(locale, "/join")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/join"))}>
+			<p>{t("navigation.join") || "Contact"}</p>
 		</a>
 	</header>
 

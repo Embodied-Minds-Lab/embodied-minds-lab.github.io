@@ -23,10 +23,12 @@ home:
 jotting:
   tag: Tag
 navigation:
-  about: Join Us
+  about: About
   home: Home
   jotting: Jottings
+  join: Contact
   note: Note
+  publications: Publications
   people: People
   policy: Policy
   preface: Preface
@@ -36,6 +38,10 @@ note:
   series: Series
   tag: Tag
   top: To Top
+publication:
+  venue: Venue
+  year: Year
+  tag: Tag
 read:
   words: '{words} words'
 sensitive:

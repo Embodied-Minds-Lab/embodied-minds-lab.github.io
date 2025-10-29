@@ -5,7 +5,6 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { Icon } from "astro-icon/components";
 import Time from "$utils/time";
 import Base from "$layouts/Base.astro";
-import Heatmap from "$components/Heatmap.svelte";
 import config from "$config";
 import i18nit from "$i18n";
 
@@ -18,40 +17,15 @@ const { locale = i18n!.defaultLocale } = Astro.params;
 
 const t = i18nit(locale);
 
-// Get preface content for current locale, sorted by timestamp (newest first)
+// Get preface content, sorted by timestamp (newest first)
 const prefaces = (
 	await getCollection("preface", preface => {
-		// Extract language and ID from file path structure
-		const [language, id] = preface.id.split("/");
+		const [, id] = preface.id.split("/");
 		preface.id = id;
-
-		// Filter by current locale
-		return language == locale;
+		return true;
 	})
 ).sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
 
-// Get published notes for current locale, sorted by timestamp (newest first)
-const notes = (
-	await getCollection("note", note => {
-		// Extract language and note ID from file path structure
-		const [language] = note.id.split("/");
-
-		// Filter published notes by current locale
-		return !note.data.draft && language == locale;
-	})
-).sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
-
-// Get published jottings for current locale
-const jottings = await getCollection("jotting", jotting => {
-	// Extract language and jotting ID from file path structure
-	const [language] = jotting.id.split("/");
-
-	// Filter published jottings by current locale
-	return !jotting.data.draft && language == locale;
-});
-
-// Get the most recent note and preface for display
-const newest = notes[0];
 const preface = prefaces[0];
 // Render preface content if available, otherwise use empty object
 const { Content } = preface ? await render(preface) : ({} as any);
@@ -76,30 +50,5 @@ const { Content } = preface ? await render(preface) : ({} as any);
 			)
 		}
 
-		{
-			newest && (
-				<footer class="flex items-center justify-center flex-wrap-reverse gap-10">
-					<Heatmap {locale} {notes} {jottings} />
-
-					<blockquote class="flex-grow">
-						<h3>{t("home.newest")}</h3>
-						<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
-							<a href={getRelativeLocaleUrl(locale, `/note/${newest.id.split("/").slice(1).join("/")}`)} class="link">
-								{newest.data.series ? `${newest.data.series} | ` : ""}
-								{newest.data.title}
-							</a>
-							<div class="flex gap-1">
-								{newest.data.tags?.map(tag => (
-									<span class="c-remark text-size-sm">#{tag}</span>
-								))}
-							</div>
-						</div>
-						<time title={Time.full(newest.data.timestamp)} class="c-remark font-mono text-xs">
-							{Time(newest.data.timestamp)}
-						</time>
-					</blockquote>
-				</footer>
-			)
-		}
 	</main>
 </Base>

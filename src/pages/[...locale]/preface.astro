@@ -15,10 +15,9 @@ const t = i18nit(locale);
 
 const prefaces = (
 	await getCollection("preface", preface => {
-		const [language, id] = preface.id.split("/");
+		const [, id] = preface.id.split("/");
 		preface.id = id;
-
-		return language == locale;
+		return true;
 	})
 ).sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
 ---

@@ -33,45 +33,26 @@ export const GET: APIRoute = async ({ site, params }) => {
 		link: site!.toString(),										// Feed's associated website
 	});
 
-	// Aggregate items from specified sections
+	// Aggregate items from publications
 	let items = [];
 
-	if (config.feed?.section?.includes("note") || config.feed?.section === "*" || config.feed?.section === undefined) {
-		let notes = (await getCollection("note", note => {
+	if (config.feed?.section?.includes("publications") || config.feed?.section === "*" || config.feed?.section === undefined) {
+		let publications = (await getCollection("publications", publication => {
 			// Extract language from the file path structure
-			const [locale, ...id] = note.id.split("/");
+			const [locale, ...id] = publication.id.split("/");
 
 			// Attach locale and link
-			(<any>note).link = new URL(getRelativeLocaleUrl(locale, `/note/${id.join("/")}`), site).toString();
+			(<any>publication).link = new URL(getRelativeLocaleUrl(locale, `/publications/${id.join("/")}`), site).toString();
 
 			// Apply filtering criteria
-			let published = !note.data.draft;		// Exclude draft posts
+			let published = !publication.data.draft;		// Exclude draft posts
 			let localed = language == locale;		// Language filter
 
-			// Include note only if it passes all filters
+			// Include publication only if it passes all filters
 			return published && localed;
 		}));
 
-		items.push(...notes);
-	}
-
-	if (config.feed?.section?.includes("jotting") || config.feed?.section === "*" || config.feed?.section === undefined) {
-		let jottings = (await getCollection("jotting", jotting => {
-			// Extract language from the file path structure
-			const [locale, ...id] = jotting.id.split("/");
-
-			// Attach locale and link
-			(<any>jotting).link = new URL(getRelativeLocaleUrl(locale, `/jotting/${id.join("/")}`), site).toString();
-
-			// Apply filtering criteria
-			let published = !jotting.data.draft;	// Exclude draft posts
-			let localed = language == locale;		// Language filter
-
-			// Include note only if it passes all filters
-			return published && localed;
-		}));
-
-		items.push(...jottings);
+		items.push(...publications);
 	}
 
 	// Sort all items by timestamp and limit to configured number

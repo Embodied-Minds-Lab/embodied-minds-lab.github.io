@@ -1,43 +1,7 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
-/**
- * Note collection configuration
- * Represents main blog articles with comprehensive metadata
- */
-const note = defineCollection({
-	// Load all markdown files except those starting with underscore (private/draft files)
-	loader: glob({ pattern: ["**/*.md", "!**/_*.md", "!**/_*/*.md"], base: "./src/content/note" }),
-	schema: z.object({
-		title: z.string(),								// Post title (required)
-		timestamp: z.date(),							// Publication date (required)
-		series: z.string().optional(),					// Series name for grouped posts
-		tags: z.array(z.string()).optional(),			// Array of topic tags
-		description: z.string().optional(),				// Post description/excerpt
-		sensitive: z.boolean().default(false),			// Marks content as sensitive
-		contents: z.boolean().default(false),			// Whether to show table of contents
-		top: z.number().int().nonnegative().default(0),	// Top priority for sorting (higher is more important)
-		draft: z.boolean().default(false)				// Draft status (excludes from public listing)
-	})
-});
-
-/**
- * Jotting collection configuration
- * Represents shorter posts, quick thoughts, or micro-blog entries
- */
-const jotting = defineCollection({
-	// Load all markdown files except those starting with underscore
-	loader: glob({ pattern: ["**/*.md", "!**/_*.md", "!**/_*/*.md"], base: "./src/content/jotting" }),
-	schema: z.object({
-		title: z.string(),								// Jotting title (required)
-		timestamp: z.date(),							// Publication date (required)
-		tags: z.array(z.string()).optional(),			// Array of topic tags
-		description: z.string().optional(),				// Brief description
-		sensitive: z.boolean().default(false),			// Marks content as sensitive
-		top: z.number().int().nonnegative().default(0),	// Top priority for sorting (higher is more important)
-		draft: z.boolean().default(false)				// Draft status
-	})
-});
+// Note and Jotting collections removed (directories no longer exist)
 
 /**
  * Preface collection configuration
@@ -60,4 +24,23 @@ const information = defineCollection({
 	loader: glob({ pattern: "**/*.(md|yaml)", base: "./src/content/information" })
 });
 
-export const collections = { note, jotting, preface, information };
+/**
+ * Publications collection configuration
+ * Represents academic publications metadata
+ */
+const publications = defineCollection({
+    // Load all markdown files except those starting with underscore
+    loader: glob({ pattern: ["**/*.md", "!**/_*.md", "!**/_*/*.md"], base: "./src/content/publications" }),
+    schema: z.object({
+        title: z.string(),
+        authors: z.array(z.string()),
+        venue: z.string(),
+        year: z.number().int(),
+        link: z.string().url().optional(),
+        doi: z.string().optional(),
+        tags: z.array(z.string()).optional(),
+        draft: z.boolean().default(false)
+    })
+});
+
+export const collections = { preface, information, publications };

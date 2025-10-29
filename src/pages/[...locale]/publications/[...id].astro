@@ -1,0 +1,81 @@
+---
+import { i18n } from "astro:config/client";
+import { getCollection } from "astro:content";
+import Base from "$layouts/Base.astro";
+import Icon from "$components/Icon.astro";
+import Sensitive from "$components/Sensitive.svelte";
+import i18nit from "$i18n";
+
+export async function getStaticPaths() {
+	// Get all publications excluding drafts
+	const publications = await getCollection("publications", publication => !publication.data.draft);
+
+	return publications.map(publication => {
+		// Extract publication ID from file path structure (remove 'en' prefix)
+		const [, ...id] = publication.id.split("/");
+
+		// Generate path params with optional locale (omit for default locale)
+		return { params: { locale: i18n?.defaultLocale == "en" ? undefined : "en", id: id.join("/") }, props: { publication } };
+	});
+}
+
+const { locale = i18n!.defaultLocale } = Astro.params;
+const { publication } = Astro.props;
+
+const t = i18nit(locale);
+---
+
+<Base title={publication.data.title} {locale} description={`${publication.data.authors.join(", ")} - ${publication.data.venue} ${publication.data.year}`}>
+	<main class="flex flex-col gap-6">
+		<header class="flex flex-col gap-4">
+			<h1 class="text-3xl">{publication.data.title}</h1>
+			<div class="flex flex-col gap-3 sm:flex-row children:(flex items-center gap-1 text-3.5 c-secondary)">
+				{
+					<span>
+						<Icon name="lucide:users" />
+						{publication.data.authors.join(", ")}
+					</span>
+				}
+				{
+					<span>
+						<Icon name="lucide:building" />
+						{publication.data.venue}
+					</span>
+				}
+				{
+					<span>
+						<Icon name="lucide:calendar" />
+						{publication.data.year}
+					</span>
+				}
+				{
+					publication.data.tags?.length && (
+						<span>
+							<Icon name="lucide:hash" />
+							{publication.data.tags?.join("; ")}
+						</span>
+					)
+				}
+			</div>
+			<hr class="b-b b-b-solid b-weak" />
+		</header>
+
+		<section class="flex flex-col gap-4">
+			{
+				publication.data.doi && (
+					<div>
+						<strong>DOI:</strong> <a href={`https://doi.org/${publication.data.doi}`} target="_blank" rel="noopener noreferrer" class="text-primary underline">{publication.data.doi}</a>
+					</div>
+				)
+			}
+			{
+				publication.data.link && (
+					<div>
+						<strong>Link:</strong> <a href={publication.data.link} target="_blank" rel="noopener noreferrer" class="text-primary underline">View Paper</a>
+					</div>
+				)
+			}
+		</section>
+	</main>
+</Base>
+

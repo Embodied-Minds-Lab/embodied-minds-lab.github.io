@@ -13,9 +13,9 @@ const { locale = i18n!.defaultLocale } = Astro.params;
 const t = i18nit(locale);
 
 const information = await getCollection("information", information => {
-	const [language, id] = information.id.split("/");
+	const [, id] = information.id.split("/");
 	information.id = id;
-	return language == locale;
+	return true;
 });
 
 let policy = information.find(info => info.id == "policy");
