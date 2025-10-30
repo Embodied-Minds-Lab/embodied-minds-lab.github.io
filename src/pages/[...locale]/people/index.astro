@@ -11,38 +11,69 @@ export async function getStaticPaths() {
 const { locale = i18n!.defaultLocale } = Astro.params;
 const t = i18nit(locale);
 
-// Define people data
+// Define people data - manually curated for consistency
 const people = [
+	// Postdocs
 	{
-		name: "Yilun Du",
-		position: "Principal Investigator",
-		image: "/people/yilundu.jpg",
-		bio: "Yilun Du is a researcher interested in robotics.",
+		name: "Wenhui (Oscar) Huang",
+		position: "Postdoc",
+		image: "/people/oscar.jpg",
+		bio: "Wenhui (Oscar) Huang is a postdoctoral researcher at Harvard University, co-advised by Yilun Du and Heng Yang. He received his Ph.D. from Nanyang Technological University and his Master's degree from Politecnico di Milano.",
+		research: "His research focuses on generative AI (GenAI), vision–language models (VLMs), and vision–language–action models (VLAs), with an emphasis on their applications in the physical world, particularly in robot learning and autonomous driving.",
 		links: {
-			website: "https://yilundu.github.io/",
-			email: "ydu@seas.harvard.edu",
-			twitter: "https://twitter.com/du_yilun",
-			scholar: "https://scholar.google.com/citations?user=GRMMc_MAAAAJ&hl=en",
-			github: "https://scholar.google.com/citations?user=GRMMc_MAAAAJ&hl=en"
+			website: "https://oscarhuangwind.github.io/",
+			email: "oscarhuang@seas.harvard.edu",
+			twitter: "https://x.com/WenhuiOscar",
+			scholar: "https://scholar.google.com/citations?user=Hpatee0AAAAJ&hl=en",
+			github: "https://github.com/OscarHuangWind"
 		}
 	},
 	{
-		name: "Amani Kiruga",
-		position: "PhD Student",
-		image: "/people/amani.jpg",
-		bio: "Amani Kiruga is a researcher interested in robotics.",
+		name: "Ruojin Cai",
+		position: "Postdoctoral Research Fellow",
+		image: "/people/ruojin.jpg",
+		bio: "Ruojin Cai is a Postdoctoral Research Fellow at the Kempner Institute for the Study of Natural and Artificial Intelligence at Harvard University, working with Professor Yilun Du. She received her Ph.D. in Computer Science from Cornell University, co-advised by Professors Bharath Hariharan and Noah Snavely, and holds a B.S. in Computer Science from Tsinghua University.",
+		research: "Ruojin's research focuses on 3D computer vision and spatial intelligence, developing generative and multimodal foundation models to enhance 3D reconstruction and understanding.",
 		links: {
-			website: "https://amanikiruga.github.io/",
-			email: "yilun@example.com",
-			twitter: "https://twitter.com/yilundu",
-			github: "https://github.com/yilundu"
+			website: "https://ruojincai.github.io/",
+			email: "rcai@fas.harvard.edu",
+			scholar: "https://scholar.google.com/citations?user=z6D7OzoAAAAJ&hl=en",
 		}
 	},
+	{
+		name: "Haonan Chen",
+		position: "Postdoc",
+		image: "/people/haonan.jpg",
+		bio: "Haonan Chen is a postdoc at Harvard, advised by Yilun Du. Previously, he was a Ph.D. candidate in Electrical and Computer Engineering at the University of Illinois Urbana-Champaign, advised by Katie Driggs-Campbell and worked closely with Yunzhu Li.",
+		research: "He designs robots that can see, reason, and act in complex environments through multimodal decision making. His research develops composable models that integrate visual, spatial, tactile, and temporal cues to predict outcomes and plan robust actions. His work has been recognized with a Best Paper Finalist at CoRL 2023 and a Best Paper Award at the ICRA 2025 Workshop on Foundation Models and NeSy AI.",
+		links: {
+			website: "https://haonan16.github.io",
+			email: "haonan_chen@seas.harvard.edu",
+			twitter: "https://x.com/HaonanChen_",
+			scholar: "https://scholar.google.com/citations?hl=en&user=SomOgNIAAAAJ",
+		}
+	},
+	{
+		name: "Weirui Ye",
+		position: "Postdoc",
+		image: "/people/weirui.jpg",
+		bio: "Weirui Ye is a Postdoc Fellow in LIS Group at MIT CSAIL, working with Prof. Leslie Pack Kaelbling and Tomás Lozano-Pérez at MIT and Yilun Du at Harvard. Previously, he received his Ph.D. from Tsinghua University under the supervision of Prof. Yang Gao. During his Ph.D., he also worked as a visiting scholar at UC Berkeley advised by Prof. Pieter Abbeel.",
+		research: "His research goal is to develop human-level policy learning algorithms for robots in learning efficiency and generalization. He is interested in Reinforcement Learning, Generative World Models and Lifelong Learning for Robots.",
+		links: {
+			website: "https://yewr.github.io/",
+			email: "ywr@csail.mit.edu",
+			twitter: "https://x.com/Weirui_Ye",
+			scholar: "https://scholar.google.com/citations?user=_GgST9AAAAAJ&hl=en",
+			github: "https://github.com/YeWR/"
+		}
+	},
+	// PhD Students
 	{
 		name: "Zhenting Qi",
 		position: "PhD Student",
-		image: "/people/zhentingqi.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		image: null,
+		bio: "Zhenting Qi is a CS PhD student at Harvard University, co-advised by Yilun Du and Hima Lakkaraju. He previously received his Master's degree at Harvard.",
+		research: "His research is centered on reasoning and reliability in AI systems, with a recent emphasis on developing agents that integrate code development and scientific discovery.",
 		links: {
 			website: "https://zhentingqi.github.io/",
 			email: "zhentingqi@g.harvard.edu",
@@ -55,7 +86,8 @@ const people = [
 		name: "Haldun Balim",
 		position: "PhD Student",
 		image: "/people/haldun.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		bio: "Haldun Balim was born in Turkey, where he studied computer science at Koç University. He then completed his M.Sc. in Robotics, Systems, and Control at ETH Zurich, focusing on the intersection of control theory and machine learning.",
+		research: "His research lies at the intersection of control theory and machine learning, aiming to design data-driven and provably correct solutions with a focus on safety, reliability, and verification in uncertain, human-centric environments. He seeks to develop holistic, principled methods that unify tools from control, machine learning, optimization, and perception to enable efficient and trustworthy decision-making.",
 		links: {
 			website: "https://haldunbalim.github.io",
 			email: "hbalim@fas.harvard.edu",
@@ -63,20 +95,35 @@ const people = [
 		}
 	},
 	{
-		name: "Zhiyi Li",
-		position: "PhD Student",
-		image: "/people/zhiyili.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		name: "Hansen Lillemark",
+		position: "Visiting PhD Student",
+		image: "/people/hansen.jpg",
+		bio: "Hansen Lillemark is currently a second year PhD student at UC San Diego advised by Prof. Zhiting Hu. He previously studied CS at UC Berkeley, advised by Prof. Bruno Olshausen and Kurt Keutzer, and in a past life, founded a financial technology startup.",
+		research: "Hansen's current research is focused on memory in world models: how can a generative model selectively compress previous observations and information into an opinionated world state, and use this memory for predicting the future? More broadly, he is interested in incorporating concepts from neuroscience such as grid and place cells into modern machine learning models and approaches.",
 		links: {
-			email: "zhiyi24@mit.edu",
-			scholar: "https://scholar.google.com/citations?user=example",
+			website: "https://hlillemark.github.io/",
+			email: "hlillemark@ucsd.edu",
+			twitter: "https://x.com/hansenlillemark",
+			scholar: "https://scholar.google.com/citations?user=X_mcf_EAAAAJ&hl=en",
+			github: "https://github.com/hlillemark"
 		}
 	},
-    {
+	{
+		name: "Zhiyi Li",
+		position: "PhD Student",
+		image: null,
+		bio: "Zhiyi Li is a PhD student at MIT EECS advised by Yilun Du. He graduated from Tsinghua University with a major in electronic engineering.",
+		research: "He is interested in exploring generative modeling for embodied agents to understand and interact with the world.",
+		links: {
+			email: "zhiyi24@mit.edu",
+		}
+	},
+	{
 		name: "Sarah Liaw",
 		position: "PhD Student",
 		image: "/people/sarah.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		bio: "Sarah Liaw is a first-year PhD student working with Profs. Yilun Du and David Alvarez-Melis.",
+		research: "She is interested in developing models that uncover the physical and structural principles underlying data, enabling generalizable learning in robotics and scientific domains.",
 		links: {
 			website: "https://sarahliaw.github.io",
 			email: "sliaw@g.harvard.edu",
@@ -87,153 +134,91 @@ const people = [
 	{
 		name: "Haoyu Xiong",
 		position: "PhD Student",
-		image: "/people/haoyuxiong.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		image: null,
+		bio: "Haoyu Xiong is a PhD student at MIT EECS, co-advised by Prof. Antonio Torralba and Prof. Yilun Du.",
+		research: "He is interested in Robot Learning.",
 		links: {
 			website: "https://haoyu-x.github.io/",
 			email: "haoyux2@mit.edu",
-			twitter: "https://x.com/intent/follow?original_referer=https%3A%2F%2Fhaoyu-x.github.io%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5EHaoyu_Xiong_&screen_name=Haoyu_Xiong_",
+			twitter: "https://x.com/Haoyu_Xiong_",
 			scholar: "https://scholar.google.com/citations?user=iGfCCEYAAAAJ&hl=en&oi=ao",
 			github: "https://github.com/haoyu-x"
 		}
 	},
-	{
-		name: "Hang Le",
-		position: "PhD Student",
-		image: "/people/hangle.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
-		links: {
-			website: "https://kempnerinstitute.harvard.edu/people/our-people/hang-le/",
-			scholar: "https://scholar.google.com/citations?user=ILbi7n4AAAAJ&hl=en",
-		}
-	},
-	{
-		name: "Wenhui (Oscar) Huang",
-		position: "Postdoc",
-		image: "/people/oscar.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
-		links: {
-			website: "https://oscarhuangwind.github.io/",
-			email: "oscarhuang@seas.harvard.edu",
-			twitter: "https://x.com/WenhuiOscar",
-			scholar: "https://scholar.google.com/citations?user=Hpatee0AAAAJ&hl=en",
-			github: "https://github.com/OscarHuangWind"
-		}
-	},
-	{
-		name: "Ruojin Cai",
-		position: "Postdoc",
-		image: "/people/ruojin.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
-		links: {
-			website: "https://ruojincai.github.io/",
-			email: "rcai@fas.harvard.edu",
-			scholar: "https://scholar.google.com/citations?user=z6D7OzoAAAAJ&hl=en",
-		}
-	},
-	{
-		name: "Haonan Chen",
-		position: "Postdoc",
-		image: "/people/haonan.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
-		links: {
-			website: "https://haonan16.github.io",
-			email: "haonan_chen@seas.harvard.edu",
-			twitter: "https://x.com/HaonanChen_",
-			scholar: "https://scholar.google.com/citations?hl=en&user=SomOgNIAAAAJ",
-		}
-	},
-	{
-		name: "Weirui Ye",
-		position: "Postdoc",
-		image: "/people/weirui.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
-		links: {
-			website: "https://yewr.github.io/",
-			email: "ywr@csail.mit.edu",
-			twitter: "https://x.com/Weirui_Ye",
-			scholar: "https://scholar.google.com/citations?user=_GgST9AAAAAJ&hl=en",
-			github: "https://github.com/YeWR/",
-		}
-	},
+	// Post-bacc
 	{
 		name: "Zoe Wu",
-		position: "Post-bacc student",
-		image: "/people/zoewu.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		position: "Post-bacc Student",
+		image: null,
+		bio: "Zoe Wu graduated from Harvard University with a degree in Statistics in 2025 and is currently a post-bacc at Kempner, advised by Yilun Du.",
+		research: "She is interested in understanding how the theoretical frameworks of differential geometry, statistical mechanics, and dynamical systems can be applied to improve generative AI systems.",
 		links: {
 			email: "zoewu@g.harvard.edu",
 		}
 	},
+	// Visiting Researchers
 	{
-		name: "Hansen Jin Lillemark",
+		name: "Runqian Wang",
 		position: "Visiting Researcher",
-		image: "/people/hansen.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		image: null,
+		bio: "Runqian Wang is an undergraduate student at MIT double majoring in AI and Math. He is currently a visiting researcher working with Yilun.",
+		research: "His focus is on generative modeling, particularly image and video generation. He is most interested in simple yet effective methods that can generalize.",
 		links: {
-			website: "https://hlillemark.github.io/",
-			email: "hlillemark@ucsd.edu",
-			twitter: "https://x.com/hansenlillemark",
-			scholar: "https://scholar.google.com/citations?user=X_mcf_EAAAAJ&hl=en",
-			github: "https://github.com/hlillemark",
+			website: "https://raywang4.github.io/",
+			email: "raywang4@mit.edu",
+			scholar: "https://scholar.google.com/citations?user=KuFJC30AAAAJ&hl=en",
+			github: "https://github.com/raywang4"
 		}
 	},
+	// Undergraduate Researchers
 	{
 		name: "Jiawei Gao",
-		position: "Visiting Researcher",
-		image: "/people/jiaweigao.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		position: "Undergraduate Researcher",
+		image: null,
+		bio: "Jiawei Gao is an undergraduate at Tsinghua University. Previously he worked at CMU RI.",
+		research: "He focuses on learning physics-structured world models for robotics and cognitive-science inspired robot learning.",
 		links: {
 			website: "https://gao-jiawei.com/",
 			email: "jiawei_gao@seas.harvard.edu",
 			twitter: "https://twitter.com/WinstonGu_",
 			scholar: "https://scholar.google.com/citations?hl=en&user=NJxUNrcAAAAJ",
-			github: "https://github.com/Winston-Gu",
+			github: "https://github.com/Winston-Gu"
 		}
 	},
 	{
 		name: "Runhan Huang",
-		position: "Visiting Researcher",
-		image: "/people/runhanhuang.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		position: "Undergraduate Researcher",
+		image: null,
+		bio: "Runhan Huang is a senior student at Tsinghua University, Yao Class. In the spring of 2025, he served as a research intern in Professor Du's laboratory. Prior to that, he worked as a research assistant at both the Shanghai Qizhi Institute and Tsinghua University.",
+		research: "His research interests lie at the intersection of robotics and generative AI. He aims to build generalizable embodied agents that enable robust and adaptive interaction and planning in complex real-world environments.",
 		links: {
 			website: "https://hrh6666.github.io/",
 			email: "hrh22@mails.tsinghua.edu.cn",
 			twitter: "https://x.com/RunhanH?s=21",
 			scholar: "https://scholar.google.com/citations?user=7N0VoNsAAAAJ&hl=en",
-			github: "https://github.com/hrh6666/",
-		}
-	},
-	{
-		name: "Runqian (Ray) Wang",
-		position: "Visiting Researcher",
-		image: "/people/runqianwang.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
-		links: {
-			website: "https://raywang4.github.io/",
-			email: "raywang4@mit.edu",
-			scholar: "https://scholar.google.com/citations?user=KuFJC30AAAAJ&hl=en",
-			github: "https://github.com/raywang4",
+			github: "https://github.com/hrh6666/"
 		}
 	},
 	{
 		name: "Xiaoshen Han",
-		position: "Visiting Researcher",
-		image: "/people/xiaoshenhan.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		position: "Undergraduate Researcher",
+		image: null,
+		bio: "Xiaoshen Han is a final-year undergraduate student in the IEEE Honor Class at Shanghai Jiao Tong University, majoring in Computer Science. He is now a visiting undergraduate intern at Kempner Institute, advised by Prof. Yilun Du.",
+		research: "His research interest lies in reinforcement learning, robotics, and sim-to-real. He is passionate about designing novel algorithms that enable robots to tackle more challenging tasks and generalize across a broader range of tasks.",
 		links: {
 			website: "https://xshenhan.github.io/",
 			email: "xiaoshen_han@seas.harvard.edu",
 			twitter: "https://x.com/xshenhan",
 			scholar: "https://scholar.google.com/citations?user=Mo8I5WMAAAAJ&hl=en&authuser=2",
-			github: "https://github.com/xshenhan/",
+			github: "https://github.com/xshenhan/"
 		}
 	},
 	{
 		name: "Chaoqi Liu",
-		position: "Visiting Researcher",
+		position: "Undergraduate Researcher",
 		image: "/people/chaoqi.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		bio: "Chaoqi Liu is an undergraduate student at the University of Illinois Urbana-Champaign. He is currently a visiting student intern at the lab, where he works on research in robotics.",
+		research: "Chaoqi is broadly interested in robotic manipulation. His past research has included structured policy learning and dynamics/world model learning, and he is currently focusing on action representation learning for robot policies.",
 		links: {
 			website: "https://chaoqi-liu.com/",
 			email: "chaoqil2@illinois.edu",
@@ -244,9 +229,10 @@ const people = [
 	},
 	{
 		name: "Peilin Wu",
-		position: "Visiting Researcher",
+		position: "Visiting Undergraduate Researcher",
 		image: "/people/peilin.jpg",
-		bio: "Yilun Du is a researcher interested in AI safety and robotics.",
+		bio: "Peilin Wu is a senior visiting undergraduate from Shanghai Jiao Tong University, currently working with Professor Yilun on multimodal world models.",
+		research: "Peilin is broadly interested in robotics and machine learning. Specifically, she's focusing on constructing comprehensive world models for robot decision-making, which can integrate information from diverse modalities and learn from interactions with the real world. She also has experience working with quadruped robots and reinforcement learning.",
 		links: {
 			website: "https://peilinwu.site/",
 			email: "peilin_wu@seas.harvard.edu",
@@ -256,103 +242,292 @@ const people = [
 ];
 ---
 
-<style lang="less">
-	.people-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-		gap: 2rem;
-		margin-top: 2rem;
-	}
-
-	.person-card {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		padding: 1.5rem;
-		border-radius: 8px;
-		transition: transform 0.2s ease;
-		position: relative;
-		z-index: 1;
+<Base title={t("navigation.people") || "People"} {locale}>
+	<main class="flex flex-col grow people-page-container">
+		<h1 class="text-3xl font-bold mb-12">People</h1>
 		
-		&:hover {
-			transform: translateY(-4px);
-			z-index: 1001;
-			
-			.person-bio {
-				opacity: 1;
-				visibility: visible;
-			}
-		}
-	}
-
-	.person-image {
-		width: 200px;
-		height: 200px;
-		border-radius: 8px;
-		object-fit: cover;
-		margin-bottom: 1rem;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	}
-
-	.person-name {
-		font-size: 1.5rem;
-		font-weight: bold;
-		margin-bottom: 0.25rem;
-	}
-
-	.person-position {
-		font-size: 1rem;
-		color: var(--primary-color);
-		margin-bottom: 1rem;
-		font-style: italic;
-	}
-
-	.person-links {
-		display: flex;
-		gap: 0.75rem;
-		justify-content: center;
-		flex-wrap: wrap;
-		margin-top: auto;
-	}
-
-	.link-icon {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 32px;
-		height: 32px;
-		border-radius: 4px;
-		background-color: var(--primary-color);
-		color: var(--background-color);
-		transition: transform 0.2s ease, background-color 0.2s ease;
-		
-		&:hover {
-			transform: scale(1.1);
-			background-color: var(--primary-color);
-			opacity: 0.9;
-		}
-	}
-</style>
-
-<Base title={t("navigation.people")} {locale}>
-	<main class="flex flex-col grow">
 		<div class="people-grid">
-			{people.map(person => (
-				<div class="person-card">
-					<img src={person.image} alt={person.name} class="person-image" />
-					<h2 class="person-name">{person.name}</h2>
-					<p class="person-position">{person.position}</p>
-					<div class="person-links">
-						{person.links.website && <a href={person.links.website} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="Website" title="Website"><Icon name="lucide:globe" size={16} inline /></a>}
-						{person.links.email && <a href={`mailto:${person.links.email}`} class="link-icon" aria-label="Email" title="Email"><Icon name="lucide:mail" size={16} inline /></a>}
-						{person.links.twitter && <a href={person.links.twitter} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="Twitter" title="Twitter"><Icon name="simple-icons:x" size={16} inline /></a>}
-						{person.links.scholar && <a href={person.links.scholar} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="Google Scholar" title="Google Scholar"><Icon name="simple-icons:google" size={16} inline /></a>}
-						{person.links.github && <a href={person.links.github} target="_blank" rel="noopener noreferrer" class="link-icon" aria-label="GitHub" title="GitHub"><Icon name="simple-icons:github" size={16} inline /></a>}
+			{people.map((person) => (
+				<article class="person-card">
+					<div class="person-layout">
+						<!-- Left side: Image -->
+						<div class="person-image">
+							{person.image ? (
+								<img src={person.image} alt={person.name} loading="lazy" />
+							) : (
+								<div class="image-placeholder">
+									<span>{person.name.split(' ').map(n => n[0]).join('')}</span>
+								</div>
+							)}
+						</div>
+
+						<!-- Right side: Content -->
+						<div class="person-content">
+							<h2 class="person-name">{person.name}</h2>
+							<p class="person-position">{person.position}</p>
+							
+							<div class="person-bio">
+								<p>{person.bio}</p>
+								<p>{person.research}</p>
+							</div>
+
+							<!-- Links -->
+							<div class="person-links">
+								{person.links.website && (
+									<a href={person.links.website} target="_blank" rel="noopener noreferrer" class="person-link">
+										<Icon name="lucide:globe" size={16} />
+										<span>Website</span>
+									</a>
+								)}
+								{person.links.email && (
+									<a href={`mailto:${person.links.email}`} class="person-link">
+										<Icon name="lucide:mail" size={16} />
+										<span>Email</span>
+									</a>
+								)}
+								{person.links.resume && (
+									<a href={person.links.resume} target="_blank" rel="noopener noreferrer" class="person-link">
+										<Icon name="lucide:file-search" size={16} />
+										<span>Résumé</span>
+									</a>
+								)}
+								{person.links.twitter && (
+									<a href={person.links.twitter} target="_blank" rel="noopener noreferrer" class="person-link">
+										<Icon name="simple-icons:x" size={16} />
+										<span>Twitter</span>
+									</a>
+								)}
+								{person.links.scholar && (
+									<a href={person.links.scholar} target="_blank" rel="noopener noreferrer" class="person-link">
+										<Icon name="lucide:graduation-cap" size={16} />
+										<span>Scholar</span>
+									</a>
+								)}
+								{person.links.github && (
+									<a href={person.links.github} target="_blank" rel="noopener noreferrer" class="person-link">
+										<Icon name="simple-icons:github" size={16} />
+										<span>GitHub</span>
+									</a>
+								)}
+							</div>
+						</div>
 					</div>
-				</div>
+				</article>
 			))}
 		</div>
 	</main>
 </Base>
 
+<style>
+	.people-page-container {
+		/* Break out of the parent 1000px constraint */
+		width: 100vw;
+		max-width: 100vw;
+		position: relative;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
+		padding: 0 4rem;
+	}
+
+	.people-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 3rem 3rem;
+		width: 100%;
+		max-width: 1600px;
+		margin: 0 auto;
+	}
+
+	.person-card {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.person-layout {
+		display: grid;
+		grid-template-columns: 200px 1fr;
+		gap: 1.5rem;
+		align-items: start;
+	}
+
+	.person-image {
+		width: 200px;
+		height: 200px;
+		border-radius: 4px;
+		overflow: hidden;
+		flex-shrink: 0;
+	}
+
+	.person-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.image-placeholder {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(135deg, var(--block-color) 0%, var(--shadow-color) 100%);
+		font-size: 3rem;
+		font-weight: 600;
+		color: var(--secondary-color);
+		text-transform: uppercase;
+	}
+
+	.person-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding-top: 0.25rem;
+	}
+
+	.person-name {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--primary-color);
+		margin: 0;
+		line-height: 1.2;
+	}
+
+	.person-position {
+		font-size: 1rem;
+		color: var(--secondary-color);
+		margin: 0;
+		font-weight: 500;
+	}
+
+	.person-bio {
+		margin-top: 0.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.person-bio p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: var(--primary-color);
+		margin: 0;
+	}
+
+	.person-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1rem;
+	}
+
+	.person-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		background: var(--block-color);
+		color: var(--primary-color);
+		text-decoration: none;
+		border-radius: 4px;
+		font-size: 0.9rem;
+		font-weight: 500;
+		transition: background 0.2s ease, transform 0.1s ease;
+	}
+
+	.person-link:hover {
+		background: var(--shadow-color);
+		transform: scale(1.02);
+	}
+
+	.person-link :global(figure) {
+		display: flex;
+		align-items: center;
+		margin: 0;
+	}
+
+	.person-link :global(svg) {
+		width: 16px;
+		height: 16px;
+		flex-shrink: 0;
+	}
+
+	/* Responsive Design - Conservative breakpoints */
+	
+	/* Switch to single column before things get squashed */
+	@media (max-width: 1300px) {
+		.people-grid {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+	}
+
+	/* Adjust layout for tablets */
+	@media (max-width: 900px) {
+		.people-page-container {
+			padding: 0 2rem;
+		}
+
+		.person-layout {
+			gap: 1.25rem;
+		}
+
+		.person-image {
+			width: 180px;
+			height: 180px;
+		}
+
+		.person-layout {
+			grid-template-columns: 180px 1fr;
+		}
+	}
+
+	/* Mobile layout */
+	@media (max-width: 768px) {
+		.people-page-container {
+			padding: 0 1rem;
+		}
+
+		.person-layout {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.person-image {
+			width: 200px;
+			height: 200px;
+			margin: 0 auto;
+		}
+
+		.image-placeholder {
+			font-size: 2.5rem;
+		}
+
+		.person-content {
+			text-align: center;
+		}
+
+		.person-name {
+			font-size: 1.25rem;
+		}
+
+		.person-position {
+			font-size: 0.9rem;
+		}
+
+		.person-bio p {
+			font-size: 0.9rem;
+			text-align: left;
+		}
+
+		.person-links {
+			justify-content: center;
+		}
+
+		.people-grid {
+			gap: 2.5rem;
+		}
+	}
+</style>

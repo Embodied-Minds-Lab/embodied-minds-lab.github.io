@@ -15,6 +15,11 @@ venv/
 *.pyc
 __pycache__/
 publications_data.json
+lab_members.csv
+members_data.json
+people_structured.json
+parse_members.py
+prepare_people_page.py
 
 # logs
 npm-debug.log*

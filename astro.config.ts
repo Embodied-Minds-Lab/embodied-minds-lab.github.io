@@ -151,6 +151,7 @@ export default defineConfig({
           "file-search",
           "flag-triangle-right",
           "globe",
+          "graduation-cap",
           "hash",
           "history",
           "house",
