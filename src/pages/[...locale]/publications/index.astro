@@ -130,54 +130,64 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 </Base>
 
 <script define:vars={{ currentYear }}>
-	// Filter functionality
-	const displayRadios = document.querySelectorAll('input[name="display"]');
-	const yearFilters = document.querySelectorAll('.year-filter');
-	const venueFilters = document.querySelectorAll('.venue-filter');
-	const cards = document.querySelectorAll('.publication-card');
+	function initFilters() {
+		// Filter functionality
+		const displayRadios = document.querySelectorAll('input[name="display"]');
+		const yearFilters = document.querySelectorAll('.year-filter');
+		const venueFilters = document.querySelectorAll('.venue-filter');
+		const cards = document.querySelectorAll('.publication-card');
 
-	function filterPublications() {
-		// Get selected display mode
-		const selectedDisplay = document.querySelector('input[name="display"]:checked')?.value || 'all';
-		
-		// Get selected years
-		const selectedYears = Array.from(yearFilters)
-			.filter(f => f.checked)
-			.map(f => parseInt(f.dataset.value));
-		
-		// Get selected venues
-		const selectedVenues = Array.from(venueFilters)
-			.filter(f => f.checked)
-			.map(f => f.dataset.value);
+		if (cards.length === 0) return; // Exit if no cards found
 
-		cards.forEach(card => {
-			const year = parseInt(card.dataset.year);
-			const venue = card.dataset.venue;
-			let show = true;
+		function filterPublications() {
+			// Get selected display mode
+			const selectedDisplay = document.querySelector('input[name="display"]:checked')?.value || 'all';
+			
+			// Get selected years
+			const selectedYears = Array.from(yearFilters)
+				.filter(f => f.checked)
+				.map(f => parseInt(f.dataset.value));
+			
+			// Get selected venues
+			const selectedVenues = Array.from(venueFilters)
+				.filter(f => f.checked)
+				.map(f => f.dataset.value);
 
-			// Apply display mode filter
-			if (selectedDisplay === 'recent') {
-				show = year >= currentYear - 1;
-			}
+			cards.forEach(card => {
+				const year = parseInt(card.dataset.year);
+				const venue = card.dataset.venue;
+				let show = true;
 
-			// Apply year filters (if any selected, show only those)
-			if (show && selectedYears.length > 0) {
-				show = selectedYears.includes(year);
-			}
+				// Apply display mode filter
+				if (selectedDisplay === 'recent') {
+					show = year >= currentYear - 1;
+				}
 
-			// Apply venue filters (if any selected, show only those)
-			if (show && selectedVenues.length > 0) {
-				show = selectedVenues.includes(venue);
-			}
+				// Apply year filters (if any selected, show only those)
+				if (show && selectedYears.length > 0) {
+					show = selectedYears.includes(year);
+				}
 
-			card.style.display = show ? '' : 'none';
-		});
+				// Apply venue filters (if any selected, show only those)
+				if (show && selectedVenues.length > 0) {
+					show = selectedVenues.includes(venue);
+				}
+
+				card.style.display = show ? '' : 'none';
+			});
+		}
+
+		// Add event listeners
+		displayRadios.forEach(radio => radio.addEventListener('change', filterPublications));
+		yearFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
+		venueFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
 	}
 
-	// Add event listeners
-	displayRadios.forEach(radio => radio.addEventListener('change', filterPublications));
-	yearFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
-	venueFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
+	// Initialize on page load
+	initFilters();
+
+	// Re-initialize after page transitions (for Swup navigation)
+	document.addEventListener('astro:page-load', initFilters);
 </script>
 
 <style>
