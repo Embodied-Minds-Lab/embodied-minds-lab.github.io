@@ -15,6 +15,7 @@ let route = Astro.url.pathname;
 
 const { locale = i18n?.defaultLocale, title: subtitle, description = config.description, article } = Astro.props;
 const title = config.title;
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <script>
@@ -41,7 +42,7 @@ const title = config.title;
 		<div id="body" class="flex flex-col min-h-screen">
 			<header class="sticky top-0 flex items-center justify-between pt-3 pb-1 mb-4 bg-background z-2 sm:(static pb-12)">
 				<a href={getRelativeLocaleUrl(locale)} class="text-size-xl sm:text-size-3xl font-bold">
-					<img src="/logo.svg" alt={title} class="h-8 sm:h-10" />
+					<img src={`${baseUrl}logo.svg`} alt={title} class="h-8 sm:h-10" />
 				</a>
 
 				<Navigator {locale} {route} client:load>

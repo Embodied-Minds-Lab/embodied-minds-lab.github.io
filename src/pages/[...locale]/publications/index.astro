@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 const { locale = i18n!.defaultLocale } = Astro.params;
 
 const t = i18nit(locale);
+const baseUrl = import.meta.env.BASE_URL;
 
 const publications = await getCollection("publications", publication => !publication.data.draft);
 
@@ -37,15 +38,15 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 				<div class="publications-grid">
 					{sortedPublications.map((pub) => (
 						<article class="publication-card" data-year={pub.data.year} data-venue={pub.data.venue}>
-							<div class="publication-image">
-								{pub.data.image ? (
-									<img src={pub.data.image} alt={pub.data.title} loading="lazy" />
-								) : (
-									<div class="placeholder-image">
-										<span class="year-badge">{pub.data.year}</span>
-									</div>
-								)}
-							</div>
+						<div class="publication-image">
+							{pub.data.image ? (
+								<img src={`${baseUrl}${pub.data.image.startsWith('/') ? pub.data.image.slice(1) : pub.data.image}`} alt={pub.data.title} loading="lazy" />
+							) : (
+								<div class="placeholder-image">
+									<span class="year-badge">{pub.data.year}</span>
+								</div>
+							)}
+						</div>
 							
 							<div class="publication-content">
 								<h2 class="publication-title">{pub.data.title}</h2>

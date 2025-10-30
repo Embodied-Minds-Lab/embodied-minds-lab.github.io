@@ -10,6 +10,7 @@ export async function getStaticPaths() {
 
 const { locale = i18n!.defaultLocale } = Astro.params;
 const t = i18nit(locale);
+const baseUrl = import.meta.env.BASE_URL;
 
 // Define people data - manually curated for consistency
 const people = [
@@ -253,7 +254,7 @@ const people = [
 						<!-- Left side: Image -->
 						<div class="person-image">
 							{person.image ? (
-								<img src={person.image} alt={person.name} loading="lazy" />
+								<img src={`${baseUrl}${person.image.startsWith('/') ? person.image.slice(1) : person.image}`} alt={person.name} loading="lazy" />
 							) : (
 								<div class="image-placeholder">
 									<span>{person.name.split(' ').map(n => n[0]).join('')}</span>

@@ -16,6 +16,7 @@ export async function getStaticPaths() {
 const { locale = i18n!.defaultLocale } = Astro.params;
 
 const t = i18nit(locale);
+const baseUrl = import.meta.env.BASE_URL;
 
 // Get preface content, sorted by timestamp (newest first)
 const prefaces = (
@@ -34,7 +35,7 @@ const { Content } = preface ? await render(preface) : ({} as any);
 <Base title={t("navigation.home")} {locale}>
 	<main class="flex flex-col gap-5 sm:gap-10 flex-grow">
 		<header class="flex items-center justify-center grow-0.6">
-			<img src="/lab-photo.png" alt="Lab Photo" class="max-w-full h-auto" style="max-width: 500px; width: 100%;" />
+			<img src={`${baseUrl}lab-photo.png`} alt="Lab Photo" class="max-w-full h-auto" style="max-width: 500px; width: 100%;" />
 		</header>
 
 		{
