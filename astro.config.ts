@@ -137,6 +137,7 @@ export default defineConfig({
           "arrow-up-to-line",
           "at-sign",
           "book-open",
+          "building",
           "calendar",
           "circle-alert",
           "circle-check",
@@ -181,6 +182,7 @@ export default defineConfig({
           "user-round",
           "user-round-pen",
           "user-round-x",
+          "users",
           "x"
         ],
         "simple-icons": [
