@@ -10,6 +10,12 @@ dist/
 # dependencies
 node_modules/
 
+# Python virtual environment
+venv/
+*.pyc
+__pycache__/
+publications_data.json
+
 # logs
 npm-debug.log*
 yarn-debug.log*
