@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 const { locale = i18n!.defaultLocale } = Astro.params;
 
 const t = i18nit(locale);
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 
 // Get preface content, sorted by timestamp (newest first)
 const prefaces = (
