@@ -1,0 +1,12 @@
+# Test build locally first
+npm run build
+
+# If successful, preview it
+npm run preview
+
+# If everything looks good, deploy
+git add .
+git commit -m "Update website"
+git push origin main
+
+## and github actions will take care of the rest

@@ -37,6 +37,7 @@ import reading from "./src/utils/remark/reading";
 // https://astro.build/config
 export default defineConfig({
   site: "https://amanikiruga.github.io/lab-group-website",  // Update this with your actual GitHub Pages URL
+  base: "/lab-group-website",  // This is required for GitHub Pages subdirectory deployment
   trailingSlash: "never",
   i18n: {
     locales: ["en"],
