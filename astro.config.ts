@@ -36,7 +36,7 @@ import reading from "./src/utils/remark/reading";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://thought-lite.vercel.app",
+  site: "https://amanikiruga.github.io/lab-group-website",  // Update this with your actual GitHub Pages URL
   trailingSlash: "never",
   i18n: {
     locales: ["en"],
