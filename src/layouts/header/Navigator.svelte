@@ -56,16 +56,16 @@
     <header class="grid gap-5 c-secondary grid-rows-[repeat(5,1fr)] sm:(grid-rows-none grid-cols-[repeat(4,1fr)])">
 		<button onclick={() => (menu = false)} class="sm:hidden">{@render close()}</button>
 
-		<a href={getRelativeLocaleUrl(locale)} class:location={route == getRelativeLocaleUrl(locale) || route.startsWith(getRelativeLocaleUrl(locale, "/preface"))}>
+		<a href={getUrl("/")} class:location={route == getUrl("/") || route.startsWith(getUrl("/preface"))}>
 			<p>{t("navigation.home")}</p>
 		</a>
-        <a href={getRelativeLocaleUrl(locale, "/publications")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/publications"))}>
+        <a href={getUrl("/publications")} class:location={route.startsWith(getUrl("/publications"))}>
             <p>{t("navigation.publications") || "Publications"}</p>
         </a>
-        <a href={getRelativeLocaleUrl(locale, "/people")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/people"))}>
+        <a href={getUrl("/people")} class:location={route.startsWith(getUrl("/people"))}>
             <p>{t("navigation.people")}</p>
         </a>
-        <a href={getRelativeLocaleUrl(locale, "/join")} class:location={route.startsWith(getRelativeLocaleUrl(locale, "/join"))}>
+        <a href={getUrl("/join")} class:location={route.startsWith(getUrl("/join"))}>
 			<p>{t("navigation.join") || "Contact"}</p>
 		</a>
 	</header>
@@ -84,9 +84,15 @@
 	import i18nit from "$i18n";
 	import ThemeSwitcher from "./ThemeSwitcher.svelte";
 
-	let { locale, route, home, note, jotting, people, about, sun, moon, bars, close }: { locale: string; route: string } & { [key: string]: Snippet } = $props();
+	let { locale, route, baseUrl = '', home, note, jotting, people, about, sun, moon, bars, close }: { locale: string; route: string; baseUrl?: string } & { [key: string]: Snippet } = $props();
 
 	const t = i18nit(locale);
+	
+	// Helper to construct full URL with base path
+	const getUrl = (path: string) => {
+		const normalizedBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+		return normalizedBase + path;
+	};
 
 	// Control mobile menu visibility state
 	let menu: boolean = $state(false);

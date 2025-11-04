@@ -14,6 +14,20 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 
 // Define people data - manually curated for consistency
 const people = [
+	{
+		name: "Yilun Du",
+		position: "Principal Investigator",
+		image: "/people/yilundu.jpg",
+		bio: "Yilun Du is an Assistant Professor at Harvard in the Kempner Institute and Computer Science. He received his PhD from MIT EECS, advised by Leslie Kaelbling, Tomas Lozano-Perez, and Joshua B. Tenenbaum. He also holds a bachelor's degree from MIT, was a research fellow at OpenAI, a senior research scientist at Google DeepMind, and received a gold medal at the International Biology Olympiad.",
+		research: "His research focuses on developing intelligent embodied agents in the physical world through generative AI, decision making, and robot learning.",
+		links: {
+			website: "https://yilundu.github.io/yilundu.github.io",
+			email: "ydu@seas.harvard.edu",
+			twitter: "https://twitter.com/du_yilun",
+			scholar: "https://scholar.google.com/citations?user=GRMMc_MAAAAJ&hl=en",
+			github: "https://github.com/yilundus"
+		}
+	},
 	// Postdocs
 	{
 		name: "Wenhui (Oscar) Huang",
@@ -31,7 +45,7 @@ const people = [
 	},
 	{
 		name: "Ruojin Cai",
-		position: "Postdoctoral Research Fellow",
+		position: "Postdoc",
 		image: "/people/ruojin.jpg",
 		bio: "Ruojin Cai is a Postdoctoral Research Fellow at the Kempner Institute for the Study of Natural and Artificial Intelligence at Harvard University, working with Professor Yilun Du. She received her Ph.D. in Computer Science from Cornell University, co-advised by Professors Bharath Hariharan and Noah Snavely, and holds a B.S. in Computer Science from Tsinghua University.",
 		research: "Ruojin's research focuses on 3D computer vision and spatial intelligence, developing generative and multimodal foundation models to enhance 3D reconstruction and understanding.",
@@ -72,7 +86,7 @@ const people = [
 	{
 		name: "Zhenting Qi",
 		position: "PhD Student",
-		image: null,
+		image: "/people/zhenting.jpg",
 		bio: "Zhenting Qi is a CS PhD student at Harvard University, co-advised by Yilun Du and Hima Lakkaraju. He previously received his Master's degree at Harvard.",
 		research: "His research is centered on reasoning and reliability in AI systems, with a recent emphasis on developing agents that integrate code development and scientific discovery.",
 		links: {
@@ -93,20 +107,6 @@ const people = [
 			website: "https://haldunbalim.github.io",
 			email: "hbalim@fas.harvard.edu",
 			scholar: "https://scholar.google.com/citations?user=ELPn5DsAAAAJ&hl=en&oi=ao",
-		}
-	},
-	{
-		name: "Hansen Lillemark",
-		position: "Visiting PhD Student",
-		image: "/people/hansen.jpg",
-		bio: "Hansen Lillemark is currently a second year PhD student at UC San Diego advised by Prof. Zhiting Hu. He previously studied CS at UC Berkeley, advised by Prof. Bruno Olshausen and Kurt Keutzer, and in a past life, founded a financial technology startup.",
-		research: "Hansen's current research is focused on memory in world models: how can a generative model selectively compress previous observations and information into an opinionated world state, and use this memory for predicting the future? More broadly, he is interested in incorporating concepts from neuroscience such as grid and place cells into modern machine learning models and approaches.",
-		links: {
-			website: "https://hlillemark.github.io/",
-			email: "hlillemark@ucsd.edu",
-			twitter: "https://x.com/hansenlillemark",
-			scholar: "https://scholar.google.com/citations?user=X_mcf_EAAAAJ&hl=en",
-			github: "https://github.com/hlillemark"
 		}
 	},
 	{
@@ -146,6 +146,20 @@ const people = [
 			github: "https://github.com/haoyu-x"
 		}
 	},
+	{
+		name: "Hansen Lillemark",
+		position: "Visiting PhD Student",
+		image: "/people/hansen.jpg",
+		bio: "Hansen Lillemark is currently a second year PhD student at UC San Diego advised by Prof. Zhiting Hu. He previously studied CS at UC Berkeley, advised by Prof. Bruno Olshausen and Kurt Keutzer, and in a past life, founded a financial technology startup.",
+		research: "Hansen's current research is focused on memory in world models: how can a generative model selectively compress previous observations and information into an opinionated world state, and use this memory for predicting the future? More broadly, he is interested in incorporating concepts from neuroscience such as grid and place cells into modern machine learning models and approaches.",
+		links: {
+			website: "https://hlillemark.github.io/",
+			email: "hlillemark@ucsd.edu",
+			twitter: "https://x.com/hansenlillemark",
+			scholar: "https://scholar.google.com/citations?user=X_mcf_EAAAAJ&hl=en",
+			github: "https://github.com/hlillemark"
+		}
+	},
 	// Post-bacc
 	{
 		name: "Zoe Wu",
@@ -157,10 +171,10 @@ const people = [
 			email: "zoewu@g.harvard.edu",
 		}
 	},
-	// Visiting Researchers
+	// Undergraduate Researchers
 	{
 		name: "Runqian Wang",
-		position: "Visiting Researcher",
+		position: "Undergraduate Researcher",
 		image: null,
 		bio: "Runqian Wang is an undergraduate student at MIT double majoring in AI and Math. He is currently a visiting researcher working with Yilun.",
 		research: "His focus is on generative modeling, particularly image and video generation. He is most interested in simple yet effective methods that can generalize.",
@@ -171,10 +185,10 @@ const people = [
 			github: "https://github.com/raywang4"
 		}
 	},
-	// Undergraduate Researchers
+	// Visiting Researchers
 	{
 		name: "Jiawei Gao",
-		position: "Undergraduate Researcher",
+		position: "Visiting Researcher",
 		image: null,
 		bio: "Jiawei Gao is an undergraduate at Tsinghua University. Previously he worked at CMU RI.",
 		research: "He focuses on learning physics-structured world models for robotics and cognitive-science inspired robot learning.",
@@ -188,7 +202,7 @@ const people = [
 	},
 	{
 		name: "Runhan Huang",
-		position: "Undergraduate Researcher",
+		position: "Visiting Researcher",
 		image: null,
 		bio: "Runhan Huang is a senior student at Tsinghua University, Yao Class. In the spring of 2025, he served as a research intern in Professor Du's laboratory. Prior to that, he worked as a research assistant at both the Shanghai Qizhi Institute and Tsinghua University.",
 		research: "His research interests lie at the intersection of robotics and generative AI. He aims to build generalizable embodied agents that enable robust and adaptive interaction and planning in complex real-world environments.",
@@ -202,7 +216,7 @@ const people = [
 	},
 	{
 		name: "Xiaoshen Han",
-		position: "Undergraduate Researcher",
+		position: "Visiting Researcher",
 		image: null,
 		bio: "Xiaoshen Han is a final-year undergraduate student in the IEEE Honor Class at Shanghai Jiao Tong University, majoring in Computer Science. He is now a visiting undergraduate intern at Kempner Institute, advised by Prof. Yilun Du.",
 		research: "His research interest lies in reinforcement learning, robotics, and sim-to-real. He is passionate about designing novel algorithms that enable robots to tackle more challenging tasks and generalize across a broader range of tasks.",
@@ -216,7 +230,7 @@ const people = [
 	},
 	{
 		name: "Chaoqi Liu",
-		position: "Undergraduate Researcher",
+		position: "Visiting Researcher",
 		image: "/people/chaoqi.jpg",
 		bio: "Chaoqi Liu is an undergraduate student at the University of Illinois Urbana-Champaign. He is currently a visiting student intern at the lab, where he works on research in robotics.",
 		research: "Chaoqi is broadly interested in robotic manipulation. His past research has included structured policy learning and dynamics/world model learning, and he is currently focusing on action representation learning for robot policies.",
@@ -230,7 +244,7 @@ const people = [
 	},
 	{
 		name: "Peilin Wu",
-		position: "Visiting Undergraduate Researcher",
+		position: "Visiting Researcher",
 		image: "/people/peilin.jpg",
 		bio: "Peilin Wu is a senior visiting undergraduate from Shanghai Jiao Tong University, currently working with Professor Yilun on multimodal world models.",
 		research: "Peilin is broadly interested in robotics and machine learning. Specifically, she's focusing on constructing comprehensive world models for robot decision-making, which can integrate information from diverse modalities and learn from interactions with the real world. She also has experience working with quadruped robots and reinforcement learning.",
