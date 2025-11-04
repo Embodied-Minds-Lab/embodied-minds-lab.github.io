@@ -42,12 +42,20 @@ const t = i18nit(locale);
 						{publication.data.venue}
 					</span>
 				}
-				{
-					<span>
-						<Icon name="lucide:calendar" />
-						{publication.data.year}
+			{
+				<span>
+					<Icon name="lucide:calendar" />
+					{publication.data.year}
+				</span>
+			}
+			{
+				publication.data.award && (
+					<span class="award-badge">
+						<Icon name="lucide:award" />
+						{publication.data.award}
 					</span>
-				}
+				)
+			}
 				{
 					publication.data.tags?.length && (
 						<span>
@@ -78,4 +86,11 @@ const t = i18nit(locale);
 		</section>
 	</main>
 </Base>
+
+<style>
+	.award-badge {
+		color: red;
+		font-weight: bold;
+	}
+</style>
 

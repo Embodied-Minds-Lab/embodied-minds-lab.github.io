@@ -72,7 +72,12 @@
 					<a href={getRelativeLocaleUrl(locale, `/publications/${publication.id.split("/").slice(1).join("/")}`)} class="link text-5 font-600">{publication.data.title}</a>
 					</div>
 					<div class="c-remark">{publication.data.authors.join(", ")}</div>
-					<div class="c-remark font-mono text-2.6">{publication.data.venue} · {publication.data.year}</div>
+					<div class="c-remark font-mono text-2.6">
+						{publication.data.venue} · {publication.data.year}
+						{#if publication.data.award}
+							 · <span class="font-bold" style="color: red;">{publication.data.award}</span>
+						{/if}
+					</div>
 				</div>
 				<span class="flex items-center gap-1 sm:ml-a c-remark">
 					{#each publication.data.tags as tag}

@@ -88,10 +88,14 @@
 
 	const t = i18nit(locale);
 	
-	// Helper to construct full URL with base path
+	// Helper to construct full URL with base path and locale
 	const getUrl = (path: string) => {
-		const normalizedBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-		return normalizedBase + path;
+		// For home page (empty or "/"), use getRelativeLocaleUrl without path argument
+		if (path === "/" || path === "") {
+			return getRelativeLocaleUrl(locale);
+		}
+		// For other pages, use getRelativeLocaleUrl with the path
+		return getRelativeLocaleUrl(locale, path);
 	};
 
 	// Control mobile menu visibility state
