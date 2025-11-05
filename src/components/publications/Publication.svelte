@@ -75,7 +75,7 @@
 					<div class="c-remark font-mono text-2.6">
 						{publication.data.venue} · {publication.data.year}
 						{#if publication.data.award}
-							 · <span class="font-bold" style="color: red;">{publication.data.award}</span>
+							 · <span class="font-bold" style="color: #A51C30;">{publication.data.award}</span>
 						{/if}
 					</div>
 				</div>
