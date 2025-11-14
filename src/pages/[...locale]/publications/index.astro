@@ -53,10 +53,6 @@ const allVenues = Array.from(new Set(publications.map(pub => pub.data.venue).fil
 const topVenues = priorityVenues.filter(v => allVenues.includes(v));
 const otherVenues = allVenues.filter(v => !priorityVenues.includes(v)).sort();
 const venues = [...topVenues, ...otherVenues];
-
-// Recent publications (last 2 years)
-const currentYear = new Date().getFullYear();
-const recentPublications = sortedPublications.filter(pub => pub.data.year >= currentYear - 1);
 ---
 
 <Base title={t("navigation.publications") || "Publications"} {locale}>
@@ -123,20 +119,6 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 			<!-- Sidebar on the right -->
 			<aside class="publications-sidebar">
 				<section class="filter-section">
-					<h3>Display</h3>
-					<div class="filter-group">
-						<label class="filter-label">
-							<input type="radio" name="display" value="all" checked class="filter-radio" />
-							<span>All</span>
-						</label>
-						<label class="filter-label">
-							<input type="radio" name="display" value="recent" class="filter-radio" />
-							<span>Recent</span>
-						</label>
-					</div>
-				</section>
-
-				<section class="filter-section">
 					<h3>Venue</h3>
 					<div class="filter-group filter-scrollable">
 						{venues.map((venue) => (
@@ -164,10 +146,9 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 	</main>
 </Base>
 
-<script define:vars={{ currentYear }}>
+<script>
 	function initFilters() {
 		// Filter functionality
-		const displayRadios = document.querySelectorAll('input[name="display"]');
 		const yearFilters = document.querySelectorAll('.year-filter');
 		const venueFilters = document.querySelectorAll('.venue-filter');
 		const cards = document.querySelectorAll('.publication-card');
@@ -175,9 +156,6 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 		if (cards.length === 0) return; // Exit if no cards found
 
 		function filterPublications() {
-			// Get selected display mode
-			const selectedDisplay = document.querySelector('input[name="display"]:checked')?.value || 'all';
-			
 			// Get selected years
 			const selectedYears = Array.from(yearFilters)
 				.filter(f => f.checked)
@@ -193,13 +171,8 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 				const venue = card.dataset.venue;
 				let show = true;
 
-				// Apply display mode filter
-				if (selectedDisplay === 'recent') {
-					show = year >= currentYear - 1;
-				}
-
 				// Apply year filters (if any selected, show only those)
-				if (show && selectedYears.length > 0) {
+				if (selectedYears.length > 0) {
 					show = selectedYears.includes(year);
 				}
 
@@ -213,7 +186,6 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 		}
 
 		// Add event listeners
-		displayRadios.forEach(radio => radio.addEventListener('change', filterPublications));
 		yearFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
 		venueFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
 	}
@@ -298,7 +270,6 @@ const recentPublications = sortedPublications.filter(pub => pub.data.year >= cur
 		text-decoration-color: var(--primary-color);
 	}
 
-	.filter-radio,
 	.filter-checkbox {
 		cursor: pointer;
 		margin: 0;

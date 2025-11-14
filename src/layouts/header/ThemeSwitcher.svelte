@@ -61,8 +61,8 @@
 		const mode = window.matchMedia("(prefers-color-scheme: dark)");
 		const theme = localStorage.getItem("theme");
 
-		// Use stored preference or fallback to system preference
-		turn_dark(theme ? theme == "dark" : mode.matches);
+		// Use stored preference or fallback to light mode as default
+		turn_dark(theme ? theme == "dark" : false);
 		// Listen for system theme changes and apply automatically
 		mode.addEventListener("change", ({ matches }) => turn_dark(matches));
 	});

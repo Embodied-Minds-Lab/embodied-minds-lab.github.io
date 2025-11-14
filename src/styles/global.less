@@ -53,13 +53,14 @@
 	--serif: "Noto Serif KR", "Noto Serif SC", serif;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Removed automatic dark mode based on system preference to default to light mode */
+/* @media (prefers-color-scheme: dark) {
 	:root {
 		.dark-theme();
 	}
 
 	.code-dark();
-}
+} */
 
 [data-theme="light"] {
 	.light-theme();

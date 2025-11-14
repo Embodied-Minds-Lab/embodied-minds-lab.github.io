@@ -1,4 +1,4 @@
-We welcome undergraduate researchers interested in robotics, machine learning, and embodied intelligence.
+We welcome researchers interested in robotics, machine learning, and embodied intelligence to join our lab.
 
 Please apply via this [Google Form](https://forms.gle/tjCk9C9FWRvtGSvH8).
 

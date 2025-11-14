@@ -25,6 +25,9 @@
       "$db/*": [
         "src/db/*"
       ],
+      "$data/*": [
+        "src/data/*"
+      ],
       "$i18n": [
         "src/i18n/index"
       ],
