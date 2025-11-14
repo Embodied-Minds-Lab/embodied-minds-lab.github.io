@@ -137,6 +137,7 @@ export default defineConfig({
           "arrow-right",
           "arrow-up-to-line",
           "at-sign",
+          "award",
           "book-open",
           "building",
           "calendar",
