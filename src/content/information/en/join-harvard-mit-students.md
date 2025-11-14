@@ -1,4 +1,3 @@
-Harvard and MIT students (undergrad and masters) interested in research are welcome to reach out. Prior research or strong coursework in ML/robotics is preferred.
+Harvard and MIT students (undergrad and masters) interested in research are welcome to reach out. Prior research or strong relevant coursework is preferred. Please use the Google Form linked in the header. 
 
-Please use the Google Form linked in the header. Share your CV, interests, availability, relevant courses/projects, and weekly time commitment. We aim for semester-long commitments with clear milestones.
-
+- If you are a Harvard undergrad, please also refer to [KURE](https://kempnerinstitute.harvard.edu/kempner-undergraduate-research-experience-kure/) for more information.

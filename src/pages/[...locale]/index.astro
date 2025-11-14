@@ -40,11 +40,13 @@ const peopleWithImages = people.filter(person => person.image);
 	<main class="flex flex-col gap-5 sm:gap-10 flex-grow">
 		<header class="flex items-center justify-center grow-0.6">
 			<div class="people-grid-home">
-				{peopleWithImages.map((person) => (
-					<a href={getRelativeLocaleUrl(locale, "/people")} class="person-square" title={person.name}>
+				{peopleWithImages.map((person) => {
+					const personId = person.name.toLowerCase().replace(/[^a-z]/g, '');
+					return (
+					<a href={getRelativeLocaleUrl(locale, `/people#${personId}`)} class="person-square" title={person.name}>
 						<img src={`${baseUrl}${person.image.replace(/^\//, '')}`} alt={person.name} loading="lazy" />
 					</a>
-				))}
+				)})}
 			</div>
 		</header>
 

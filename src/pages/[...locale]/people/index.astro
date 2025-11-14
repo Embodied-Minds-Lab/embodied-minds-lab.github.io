@@ -19,8 +19,10 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		<h1 class="text-3xl font-bold mb-12">People</h1>
 		
 		<div class="people-grid">
-			{people.map((person) => (
-				<article class="person-card">
+			{people.map((person) => {
+				const personId = person.name.toLowerCase().replace(/[^a-z]/g, '');
+				return (
+				<article class="person-card" id={personId}>
 					<div class="person-layout">
 						<!-- Left side: Image -->
 						<div class="person-image">
@@ -38,9 +40,12 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 							<h2 class="person-name">{person.name}</h2>
 							<p class="person-position">{person.position}</p>
 							
-							<div class="person-bio">
-								<p>{person.bio}</p>
-								<p>{person.research}</p>
+							<div class="person-bio-container">
+								<div class="person-bio">
+									<p>{person.bio}</p>
+									<p>{person.research}</p>
+								</div>
+								<button class="show-more-btn" aria-label="Show more">Show more</button>
 							</div>
 
 							<!-- Links -->
@@ -85,7 +90,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 						</div>
 					</div>
 				</article>
-			))}
+			)})}
 		</div>
 	</main>
 </Base>
@@ -174,11 +179,31 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		font-weight: 500;
 	}
 
-	.person-bio {
+	.person-bio-container {
+		position: relative;
 		margin-top: 0.5rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
+	}
+
+	.person-bio {
+		max-height: 6.4rem;
+		overflow: hidden;
+		position: relative;
+		transition: max-height 0.3s ease;
+	}
+
+	.person-bio:not(.expanded)::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 2.4rem;
+		background: linear-gradient(to bottom, transparent, white);
+		pointer-events: none;
+	}
+
+	.person-bio.expanded {
+		max-height: none;
 	}
 
 	.person-bio p {
@@ -186,6 +211,32 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		line-height: 1.6;
 		color: var(--primary-color);
 		margin: 0;
+	}
+
+	.person-bio p + p {
+		margin-top: 0.75rem;
+	}
+
+	.show-more-btn {
+		display: none;
+		margin-top: 0.5rem;
+		background: none;
+		border: none;
+		color: #A51C30;
+		font-size: 0.9rem;
+		font-weight: 500;
+		cursor: pointer;
+		padding: 0;
+		text-decoration: underline;
+		transition: opacity 0.2s ease;
+	}
+
+	.show-more-btn:hover {
+		opacity: 0.7;
+	}
+
+	.person-bio-container.has-overflow .show-more-btn {
+		display: block;
 	}
 
 	.person-links {
@@ -303,3 +354,25 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		}
 	}
 </style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const containers = document.querySelectorAll('.person-bio-container');
+		
+		containers.forEach(container => {
+			const bio = container.querySelector('.person-bio');
+			const btn = container.querySelector('.show-more-btn');
+			
+			// Check if content overflows
+			if (bio && bio.scrollHeight > bio.clientHeight) {
+				container.classList.add('has-overflow');
+				
+				btn?.addEventListener('click', () => {
+					const isExpanded = bio.classList.contains('expanded');
+					bio.classList.toggle('expanded');
+					btn.textContent = isExpanded ? 'Show more' : 'Show less';
+				});
+			}
+		});
+	});
+</script>

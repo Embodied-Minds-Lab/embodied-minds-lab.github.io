@@ -1,12 +1,12 @@
 {
-	"title": "ThoughtLite",
-	"prologue": "If you need a website\nthat loads fast and has great SEO, then Astro is for you.",
+	"title": "Embodied Minds Lab at Harvard",
+	"prologue": "Researching embodied intelligence and reinforcement learning\nat the intersection of robotics, computer vision, and AI.",
 	"author": {
 		"name": "Du Lab",
 		"email": "hi@your.mail",
 		"link": "https://your.website"
 	},
-	"description": "A modern Astro theme focused on content creation.",
+	"description": "The Embodied Minds Lab at Harvard.",
 	"copyright": {
 		"type": "CC BY-NC-ND 4.0",
 		"year": "2025"
