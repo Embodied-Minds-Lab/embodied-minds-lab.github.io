@@ -1,134 +1,112 @@
-# ThoughtLite
+# Embodied Minds Lab Website
 
-<div align="center">
-    <img alt="ThoughtLite Light Mode Preview" src=".github/assets/preview-light.webp">
-    <img alt="ThoughtLite Dark Mode Preview" src=".github/assets/preview-dark.webp">
-    <p></p>
-    <p>A modern <a href="https://astro.build/">Astro</a> theme, focused on content creation 🌟</p>
-    <small><ins>English</ins></small> <small><a href="README.zh-cn.md">简体中文</a></small> <small><a href="README.ja.md">日本語</a></small>
-</div>
+Official website for the Embodied Minds Lab at Harvard University, led by Professor Yilun Du.
 
-<br />
+## 🚀 Quick Start
 
-<div align="center">
-    <img alt="Version" src="https://img.shields.io/github/package-json/v/tuyuritio/astro-theme-thought-lite">
-    <img alt="License" src="https://img.shields.io/github/license/tuyuritio/astro-theme-thought-lite">
-    <img alt="Stars" src="https://img.shields.io/github/stars/tuyuritio/astro-theme-thought-lite">
-</div>
-
-<br />
-
-> [!NOTE]
-> - `main` branch✅: Static build, can be deployed on any static hosting platform.
-> - `cloudflare` branch: Enables built-in comment system, only deployable on Cloudflare.
-
-🎬 **Live Demo**: [Vercel](https://thought-lite.vercel.app/)
-
-## ✨ Features
-
-- [x] **Responsive Design** - Adaptive for mobile, tablet, and desktop.\
-- [x] **Light / Dark Mode** - Auto-follows system preference with manual toggle support.\
-- [x] **CSR Dynamic Content Filtering** - List filtering and pagination via History API.\
-- [x] **i18n Support** - Easy to extend and manage multilingual content.\
-- [x] **Sitemap & Feed Subscription** - Automated generation of Sitemap and Atom Feed.\
-- [x] **OpenGraph Support** - Built-in Open Graph meta tags for optimized social media sharing.
-
-## ⚡️ Quick Start
-
-### Using Astro Command
-
-Run the following command:
+### Development
 
 ```sh
-npx create-astro@latest --template tuyuritio/astro-theme-thought-lite
-
-# Follow the interactive prompts to create the project
-
-cd <your-project-name>
-npm run dev     # Will start the local development server at http://localhost:4321 by default
+npm install
+npm run dev     # Starts local development server at http://localhost:4321
 ```
 
-### Using Template
-
-1. [Use this template](https://github.com/new?template_name=astro-theme-thought-lite&template_owner=tuyuritio) to create a new repository or [fork](https://github.com/tuyuritio/astro-theme-thought-lite/fork) this repository.
-2. Run the following commands:
+### Building
 
 ```sh
-git clone <your-repo-url>
-cd <your-repo-name>
-npm install
-npm run dev     # Will start the local development server at http://localhost:4321 by default
+npm run build   # Builds static site to dist/
+```
+
+## 📁 Project Structure
+
+```
+├── src/
+│   ├── content/
+│   │   ├── preface/        # Homepage content
+│   │   ├── publications/   # Lab publications
+│   │   └── information/    # About, join page content
+│   ├── data/
+│   │   └── people.ts       # Lab members data
+│   ├── pages/
+│   │   └── [...locale]/
+│   │       ├── index.astro          # Homepage
+│   │       ├── people/index.astro   # People page
+│   │       └── publications/        # Publications page
+│   └── layouts/
+├── public/
+│   └── people/             # Profile images
+├── astro.config.ts         # Astro configuration
+└── site.config.json        # Site metadata
 ```
 
 ## 🔧 Configuration
 
-Customize site configuration and internationalization (i18n) by modifying the following files:
+### Site Settings
 
-- `.env`
-- `astro.config.ts`
-- `site.config.json`
+Edit `site.config.json` to update:
+- Site title and description
+- Social media links
+- Navigation menu
 
-For details, refer to the [Configuration Guide](src/content/note/en/configuration.md).
+### Astro Configuration
+
+Edit `astro.config.ts` for:
+- Base URL and deployment settings
+- Build configuration
+
+### Environment Variables
+
+Create a `.env` file for environment-specific settings.
+
+## 👥 Managing People
+
+Edit `src/data/people.ts` to add, remove, or update lab members:
+
+```typescript
+{
+  name: "Person Name",
+  position: "PhD Student",
+  image: "/people/person.jpg",
+  bio: "Short bio...",
+  research: "Research interests...",
+  links: {
+    website: "https://...",
+    email: "email@example.com",
+    scholar: "https://scholar.google.com/...",
+    github: "https://github.com/..."
+  }
+}
+```
+
+Profile images go in `public/people/`.
+
+## 📝 Managing Publications
+
+Publications are managed as markdown files in `src/content/publications/en/`.
+
+Each publication file should include frontmatter with:
+- title
+- authors
+- venue
+- year
+- links (paper, project page, etc.)
 
 ## 🚀 Deployment
 
-The current branch can be fully static built and deployed on any static hosting platform.
+The site is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to the `main` branch.
 
-For deployment methods on various platforms, refer to the [Astro Official Deployment Guide](https://docs.astro.build/en/guides/deploy/).
+### Manual Deployment
 
-## 🔄 Updates
+1. Build the site: `npm run build`
+2. Deploy the `dist/` directory to your hosting platform
 
-Run the following commands to sync upstream updates:
+## 📦 Tech Stack
 
-```sh
-git remote add theme https://github.com/tuyuritio/astro-theme-thought-lite.git
-git fetch theme
-git merge theme/main    # Add `--allow-unrelated-histories` flag for first update
-npm install
-```
+- **Framework**: [Astro](https://astro.build/)
+- **Styling**: [UnoCSS](https://unocss.dev/)
+- **Markdown**: Content collections with frontmatter
+- **Deployment**: GitHub Pages via GitHub Actions
 
-## ✍️ Content Creation
+## 📄 License
 
-Content creation is centralized in the `src/content` directory, mainly including:
-
-- `note` - Notes, focused on carefully crafted and detailed long-form works
-- `jotting` - Jottings, lightweight and immediate content recording
-- `preface` - Preface, displayed on the homepage as the first impression
-- `information` - Information, containing various descriptive content
-
-All content sections support multiple languages. Create the corresponding language directory to start creating content. For details, refer to the [Content Creation Guide](src/content/note/en/content.md).
-
-## 🤝 Contributing
-
-All kinds of contributions are welcome and appreciated!
-
-- Help promote the project or assist other users
-- Report [issues](https://github.com/tuyuritio/astro-theme-thought-lite/issues) or suggest new features
-- Improve documentation or help with internationalization (i18n)
-- Submit code contributions - see the [Code Contribution Guide](CONTRIBUTING.md) for more details
-
-## 🙏 Acknowledgments
-
-### Tech Stack
-
-- **Main Framework** - [Astro](https://astro.build/)
-- **Type Checking** - [TypeScript](https://www.typescriptlang.org/)
-- **Style Sheets** - [Less.js](https://lesscss.org/)
-- **Reactive Components** - [Svelte](https://svelte.dev/)
-- **CSS Engine** - [UnoCSS](https://unocss.dev/)
-- **Icons** - [Iconify](https://iconify.design/)
-- **Serif Fonts** - [Google Fonts](https://fonts.google.com/)
-- **Monospace Fonts** - [ZeoSeven Fonts](https://fonts.zeoseven.com/)
-- **Image Viewer** - [Medium Zoom](https://github.com/francoischalifour/medium-zoom)
-
-### Inspiration
-
-- [Fuwari](https://github.com/saicaca/fuwari)
-- [Astro Sphere](https://github.com/markhorn-dev/astro-sphere)
-- [astro-vitesse](https://github.com/adrian-ub/astro-vitesse)
-- [Miniblog](https://github.com/nicholasdly/miniblog)
-- [AstroPaper with I18n](https://github.com/yousef8/astro-paper-i18n)
-
-## 📜 License
-
-This project is licensed under [GPLv3](LICENSE), allowing free modification and distribution, but the original copyright notice must be retained.
+Built with the [ThoughtLite](https://github.com/tuyuritio/astro-theme-thought-lite) Astro theme.
