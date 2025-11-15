@@ -194,6 +194,17 @@ export const people = [
 			github: "https://github.com/raywang4"
 		}
 	},
+	{
+		name: "Lillian Sun",
+		position: "Undergraduate Researcher",
+		image: "/people/lillian.jpg",
+		bio: "Lillian Sun is an undergraduate student at Harvard studying CS and Statistics, along with a concurrent Masters in CS. Her research focuses on improving communication between models in multi-agent systems. She is interested in using synthetic data for self-improvement and designing incentives for robustness and alignment.",
+		research: "Research interests and focus areas.",
+		links: {
+			email: "lilliansun@college.harvard.edu",
+			twitter: "https://x.com/LillianSun496", // optional
+		}
+	},
 	// Visiting Researchers
 	{
 		name: "Jiawei Gao",
