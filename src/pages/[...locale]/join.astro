@@ -1,117 +1,335 @@
 ---
 import { i18n } from "astro:config/client";
-import { getCollection } from "astro:content";
 import Base from "$layouts/Base.astro";
 import i18nit from "$i18n";
-import { render } from "astro:content";
+import Icon from "$components/Icon.astro";
 
 export async function getStaticPaths() {
     return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
 }
 
 const { locale = i18n!.defaultLocale } = Astro.params;
-
 const t = i18nit(locale);
 
-const information = await getCollection("information", information => {
-    const [, id] = information.id.split("/");
-    information.id = id;
-    return true;
-});
+// Define opportunities directly in the component for better control
+const googleFormUrl = "https://forms.gle/tjCk9C9FWRvtGSvH8";
 
-let contact = information.find(info => info.id == "join-header");
-let collaborations = information.find(info => info.id == "join-collaborations");
-let phdStudents = information.find(info => info.id == "join-phd-students");
-let postdocs = information.find(info => info.id == "join-postdocs");
-let harvardMitStudents = information.find(info => info.id == "join-harvard-mit-students");
-let visitingResearchers = information.find(info => info.id == "join-visiting-researchers");
-
-const { Content: Contact } = contact ? await render(contact) : ({} as any);
-const { Content: Collaborations } = collaborations ? await render(collaborations) : ({} as any);
-const { Content: PhDStudents } = phdStudents ? await render(phdStudents) : ({} as any);
-const { Content: Postdocs } = postdocs ? await render(postdocs) : ({} as any);
-const { Content: HarvardMitStudents } = harvardMitStudents ? await render(harvardMitStudents) : ({} as any);
-const { Content: VisitingResearchers } = visitingResearchers ? await render(visitingResearchers) : ({} as any);
+const opportunities = [
+	{
+		title: "PhD Students",
+		icon: "lucide:graduation-cap",
+		description: "We are recruiting PhD students for the upcoming cycle. Strong backgrounds in math, programming, and research are expected.",
+		details: [
+			"Apply through the relevant Harvard/MIT PhD program and list Yilun as a potential advisor.",
+			"For informal outreach, we'll get in touch if there's a strong match."
+		],
+		links: [
+		
+		]
+	},
+	{
+		title: "Postdocs",
+		icon: "lucide:briefcase",
+		description: "We invite applications for postdoctoral researchers. We value independent thinkers eager to lead projects and mentor students.",
+		details: [
+			"If you prefer to reach out by email, please email Yilun at ydu [at] seas [dot] harvard [dot] edu and include your CV, a 1–2 page research statement, reference contacts, and links to representative papers/code."
+		],
+		links: [
+			{ text: "Email Yilun", url: "" }
+		]
+	},
+	{
+		title: "Harvard/MIT Students",
+		icon: "lucide:book-open",
+		description: "Harvard and MIT students (undergrad and masters) interested in research are welcome to reach out. Prior research or strong relevant coursework is preferred.",
+		details: [
+			"If you are a Harvard undergrad, please also refer to KURE (Kempner Undergraduate Research Experience) for more information."
+		],
+		links: [
+			{ text: "Contact via Google Form", url: googleFormUrl },
+			{ text: "KURE Program", url: "https://kempnerinstitute.harvard.edu/kempner-undergraduate-research-experience-kure/" }
+		]
+	},
+	{
+		title: "Visiting Researchers",
+		icon: "lucide:users",
+		description: "We welcome visiting researchers (e.g., visiting PhD students) each year.",
+		details: [],
+		links: [
+			{ text: "Contact via Google Form", url: googleFormUrl }
+		]
+	},
+	{
+		title: "Collaborations",
+		icon: "lucide:handshake",
+		description: "We welcome collaborations with academic and industry groups.",
+		details: [],
+		links: [
+			{ text: "Contact via Google Form", url: googleFormUrl }
+		]
+	}
+];
 ---
 
-<style lang="less">
-    article {
-        div {
-            margin-bottom: 2rem;
+<Base title="Join Us" {locale}>
+	<main class="flex flex-col grow join-page">
+		<h1 class="page-title">Join Us</h1>
+		
+		<section class="intro-section">
+			<p class="intro-text">
+				We welcome researchers interested in reasoning, agents, machine learning, multimodality, 
+				and embodied intelligence to join or collaborate with our lab. 
+			</p>
+		</section>
 
-            h1 {
-                margin-bottom: 1rem;
+		<div class="opportunities-grid">
+			{opportunities.map((opp) => (
+				<article class="opportunity-card">
+					<div class="card-header">
+						<div class="icon-wrapper">
+							<Icon name={opp.icon} size={24} />
+						</div>
+						<h2 class="card-title">{opp.title}</h2>
+					</div>
+					
+					<p class="card-description">{opp.description}</p>
+					
+					{opp.details.length > 0 && (
+						<ul class="card-details">
+							{opp.details.map((detail) => (
+								<li>{detail}</li>
+							))}
+						</ul>
+					)}
 
-                font-size: 1.8rem;
-            }
-        }
-    }
-</style>
-
-<Base title="Contact" {locale}>
-    <main class="flex flex-col">
-        <article class="flex flex-col">
-            {
-                contact && (
-                    <div>
-                        <samp class="markdown">
-                            <Contact />
-                        </samp>
-                    </div>
-                )
-            }
-            {
-                collaborations && (
-                    <div>
-                        <h1>Collaborations</h1>
-                        <samp class="markdown">
-                            <Collaborations />
-                        </samp>
-                    </div>
-                )
-            }
-            {
-                phdStudents && (
-                    <div>
-                        <h1>PhD Students</h1>
-                        <samp class="markdown">
-                            <PhDStudents />
-                        </samp>
-                    </div>
-                )
-            }
-            {
-                postdocs && (
-                    <div>
-                        <h1>Postdocs</h1>
-                        <samp class="markdown">
-                            <Postdocs />
-                        </samp>
-                    </div>
-                )
-            }
-            {
-                harvardMitStudents && (
-                    <div>
-                        <h1>Harvard/MIT Students</h1>
-                        <samp class="markdown">
-                            <HarvardMitStudents />
-                        </samp>
-                    </div>
-                )
-            }
-            {
-                visitingResearchers && (
-                    <div>
-                        <h1>Visiting Researchers</h1>
-                        <samp class="markdown">
-                            <VisitingResearchers />
-                        </samp>
-                    </div>
-                )
-            }
-        </article>
-    </main>
+					{opp.links && opp.links.length > 0 && (
+						<div class="card-links">
+							{opp.links.map((link) => (
+								link.url ? (
+									<a href={link.url} target="_blank" rel="noopener noreferrer" class="external-link">
+										<Icon name="lucide:external-link" size={14} />
+										<span>{link.text}</span>
+									</a>
+								) : (
+									<span class="external-link">
+										<Icon name="lucide:mail" size={14} />
+										<span>{link.text}</span>
+									</span>
+								)
+							))}
+						</div>
+					)}
+				</article>
+			))}
+		</div>
+	</main>
 </Base>
 
+<style>
+	.join-page {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
 
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--primary-color);
+		margin-bottom: 2rem;
+		text-align: center;
+	}
+
+	.intro-section {
+		text-align: center;
+		margin-bottom: 3rem;
+		padding: 2rem;
+		background: var(--block-color);
+		border-radius: 8px;
+		border: 1px solid var(--shadow-color);
+	}
+
+	.intro-text {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--primary-color);
+		margin: 0;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.inline-link {
+		color: #A51C30;
+		text-decoration: underline;
+		font-weight: 600;
+		transition: opacity 0.2s ease;
+	}
+
+	.inline-link:hover {
+		opacity: 0.7;
+	}
+
+	.opportunities-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.opportunity-card {
+		background: var(--background-color);
+		border: 1px solid var(--shadow-color);
+		border-radius: 8px;
+		padding: 1.75rem;
+		transition: all 0.2s ease;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.opportunity-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+		border-color: #A51C30;
+	}
+
+	.card-header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.icon-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		background: linear-gradient(135deg, #A51C30 0%, #8a1728 100%);
+		border-radius: 8px;
+		color: white;
+		flex-shrink: 0;
+	}
+
+	.icon-wrapper :global(figure) {
+		display: flex;
+		margin: 0;
+	}
+
+	.card-title {
+		font-size: 1.4rem;
+		font-weight: 600;
+		color: var(--primary-color);
+		margin: 0;
+	}
+
+	.card-description {
+		font-size: 1rem;
+		line-height: 1.6;
+		color: var(--primary-color);
+		margin: 0;
+	}
+
+	.card-details {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.card-details li {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: var(--secondary-color);
+		padding-left: 1.5rem;
+		position: relative;
+	}
+
+	.card-details li::before {
+		content: "•";
+		position: absolute;
+		left: 0.5rem;
+		color: #A51C30;
+		font-weight: bold;
+	}
+
+	.card-links {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		margin-top: 0.5rem;
+	}
+
+	.external-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.4rem 0.85rem;
+		background: var(--block-color);
+		color: #A51C30;
+		text-decoration: none;
+		border-radius: 4px;
+		font-size: 0.875rem;
+		font-weight: 500;
+		transition: all 0.2s ease;
+	}
+
+	.external-link:hover {
+		background: var(--shadow-color);
+		transform: scale(1.05);
+	}
+
+	.external-link :global(figure) {
+		display: flex;
+		margin: 0;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.join-page {
+			padding: 0 1rem;
+		}
+
+		.page-title {
+			font-size: 2rem;
+		}
+
+		.intro-section {
+			padding: 1.5rem;
+		}
+
+		.intro-text {
+			font-size: 1rem;
+		}
+
+		.opportunities-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.opportunity-card {
+			padding: 1.5rem;
+		}
+
+		.card-title {
+			font-size: 1.2rem;
+		}
+
+	}
+
+	@media (max-width: 480px) {
+		.card-header {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.icon-wrapper {
+			width: 40px;
+			height: 40px;
+		}
+	}
+</style>
