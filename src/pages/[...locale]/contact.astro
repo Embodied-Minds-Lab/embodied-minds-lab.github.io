@@ -35,7 +35,6 @@ const opportunities = [
 			"Consider applying to the Kempner Research Fellowship."
 		],
 		links: [
-			{ text: "Email Yilun", url: "" },
 			{ text: "Kempner Research Fellowship", url: "https://kempnerinstitute.harvard.edu/kempner-institute-research-fellowship/" }
 		]
 	},
@@ -56,11 +55,9 @@ const opportunities = [
 		title: "Visiting Researchers",
 		icon: "lucide:users",
 		description: "We welcome visiting researchers each year. ",
-		details: ["While we may not be able to reply to every message, collaborations work best when there is clear overlap with our research and a specific project or idea in mind. Please reach out via the Google Form and we'll get in touch if there's a strong match.", 
-         "For industry and academic collaborations, please email Yilun at ydu [at] seas [dot] harvard [dot] edu."],
+		details: ["While we may not be able to reply to every message, collaborations work best when there is clear overlap with our research and a specific project or idea in mind. Please reach out via the Google Form and we'll get in touch if there's a strong match."],
 		links: [
 			{ text: "Contact via Google Form", url: googleFormUrl }, 
-            { text: "Email Yilun", url: "" }
 		]
 	},
 ];
@@ -70,12 +67,13 @@ const opportunities = [
 	<main class="flex flex-col grow join-page">
 		<h1 class="page-title">Contact</h1>
 		
-		<section class="intro-section">
-			<p class="intro-text">
-				We welcome researchers interested in robotics, agents, computer vision, machine learning,
-				and embodied intelligence to join or collaborate with our lab. 
-			</p>
-		</section>
+	<section class="intro-section">
+		<p class="intro-text">
+			We welcome researchers interested in robotics, agents, computer vision, multimodality, machine learning,
+			and embodied intelligence to join or collaborate with our lab. 
+			For general contact, please reach out through this <a href={googleFormUrl} target="_blank" rel="noopener noreferrer" class="inline-link">Google Form</a>.
+		</p>
+	</section>
 
 		<div class="opportunities-grid">
 			{opportunities.map((opp) => (
