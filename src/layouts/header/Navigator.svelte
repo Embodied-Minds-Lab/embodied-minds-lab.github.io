@@ -65,7 +65,7 @@
         <a href={getUrl("/people")} class:location={route.startsWith(getUrl("/people"))}>
             <p>{t("navigation.people")}</p>
         </a>
-        <a href={getUrl("/join")} class:location={route.startsWith(getUrl("/join"))}>
+        <a href={getUrl("/contact")} class:location={route.startsWith(getUrl("/contact"))}>
 			<p>{t("navigation.join") || "Contact"}</p>
 		</a>
 	</header>
