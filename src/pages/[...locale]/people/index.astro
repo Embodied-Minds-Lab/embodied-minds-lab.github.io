@@ -355,35 +355,46 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 	}
 </style>
 
-<script>
+<script is:inline>
 	function initShowMore() {
-		const containers = document.querySelectorAll('.person-bio-container');
-		
-		containers.forEach(container => {
-			const bio = container.querySelector('.person-bio');
-			const btn = container.querySelector('.show-more-btn');
+		// Use requestAnimationFrame to ensure DOM is fully rendered
+		requestAnimationFrame(() => {
+			const containers = document.querySelectorAll('.person-bio-container');
 			
-			// Check if content overflows
-			if (bio && bio.scrollHeight > bio.clientHeight) {
-				container.classList.add('has-overflow');
+			containers.forEach(container => {
+				const bio = container.querySelector('.person-bio');
+				const btn = container.querySelector('.show-more-btn');
 				
-				// Remove existing listener to avoid duplicates
-				const newBtn = btn?.cloneNode(true);
-				if (btn && newBtn) {
-					btn.replaceWith(newBtn);
-					newBtn.addEventListener('click', () => {
-						const isExpanded = bio.classList.contains('expanded');
-						bio.classList.toggle('expanded');
-						newBtn.textContent = isExpanded ? 'Show more' : 'Show less';
-					});
+				// Always reset state
+				container.classList.remove('has-overflow');
+				
+				// Check if content overflows
+				if (bio && bio.scrollHeight > bio.clientHeight) {
+					container.classList.add('has-overflow');
+					
+					if (btn) {
+						// Clone button to remove old event listeners
+						const newBtn = btn.cloneNode(true);
+						btn.parentNode.replaceChild(newBtn, btn);
+						
+						newBtn.addEventListener('click', function() {
+							const isExpanded = bio.classList.contains('expanded');
+							bio.classList.toggle('expanded');
+							newBtn.textContent = isExpanded ? 'Show more' : 'Show less';
+						});
+					}
 				}
-			}
+			});
 		});
 	}
 
-	// Initialize on page load
-	document.addEventListener('DOMContentLoaded', initShowMore);
+	// Run on initial page load
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initShowMore);
+	} else {
+		initShowMore();
+	}
 	
-	// Re-initialize on Astro page transitions
+	// Re-run on Astro page transitions
 	document.addEventListener('astro:page-load', initShowMore);
 </script>
