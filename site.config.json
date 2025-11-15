@@ -1,12 +1,12 @@
 {
 	"title": "Embodied Minds Lab at Harvard",
-	"prologue": "Researching embodied intelligence and reinforcement learning\nat the intersection of robotics, computer vision, and AI.",
+	"prologue": "Research in embodied intelligence, vision, and robotics.",
 	"author": {
-		"name": "Du Lab",
-		"email": "hi@your.mail",
-		"link": "https://your.website"
+		"name": "Embodied Minds Lab",
+		"email": "ydu@seas.harvard.edu",
+		"link": "https://embodied-minds-lab.github.io"
 	},
-	"description": "The Embodied Minds Lab at Harvard.",
+	"description": "Research in embodied intelligence, vision, and robotics.",
 	"copyright": {
 		"type": "CC BY-NC-ND 4.0",
 		"year": "2025"

@@ -356,7 +356,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 </style>
 
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
+	function initShowMore() {
 		const containers = document.querySelectorAll('.person-bio-container');
 		
 		containers.forEach(container => {
@@ -367,12 +367,23 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 			if (bio && bio.scrollHeight > bio.clientHeight) {
 				container.classList.add('has-overflow');
 				
-				btn?.addEventListener('click', () => {
-					const isExpanded = bio.classList.contains('expanded');
-					bio.classList.toggle('expanded');
-					btn.textContent = isExpanded ? 'Show more' : 'Show less';
-				});
+				// Remove existing listener to avoid duplicates
+				const newBtn = btn?.cloneNode(true);
+				if (btn && newBtn) {
+					btn.replaceWith(newBtn);
+					newBtn.addEventListener('click', () => {
+						const isExpanded = bio.classList.contains('expanded');
+						bio.classList.toggle('expanded');
+						newBtn.textContent = isExpanded ? 'Show more' : 'Show less';
+					});
+				}
 			}
 		});
-	});
+	}
+
+	// Initialize on page load
+	document.addEventListener('DOMContentLoaded', initShowMore);
+	
+	// Re-initialize on Astro page transitions
+	document.addEventListener('astro:page-load', initShowMore);
 </script>
