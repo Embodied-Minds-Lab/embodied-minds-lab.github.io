@@ -146,57 +146,6 @@ const venues = [...topVenues, ...otherVenues];
 	</main>
 </Base>
 
-<script>
-	function initFilters() {
-		// Filter functionality
-		const yearFilters = document.querySelectorAll('.year-filter');
-		const venueFilters = document.querySelectorAll('.venue-filter');
-		const cards = document.querySelectorAll('.publication-card');
-
-		if (cards.length === 0) return; // Exit if no cards found
-
-		function filterPublications() {
-			// Get selected years
-			const selectedYears = Array.from(yearFilters)
-				.filter(f => f.checked)
-				.map(f => parseInt(f.dataset.value));
-			
-			// Get selected venues
-			const selectedVenues = Array.from(venueFilters)
-				.filter(f => f.checked)
-				.map(f => f.dataset.value);
-
-			cards.forEach(card => {
-				const year = parseInt(card.dataset.year);
-				const venue = card.dataset.venue;
-				let show = true;
-
-				// Apply year filters (if any selected, show only those)
-				if (selectedYears.length > 0) {
-					show = selectedYears.includes(year);
-				}
-
-				// Apply venue filters (if any selected, show only those)
-				if (show && selectedVenues.length > 0) {
-					show = selectedVenues.includes(venue);
-				}
-
-				card.style.display = show ? '' : 'none';
-			});
-		}
-
-		// Add event listeners
-		yearFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
-		venueFilters.forEach(checkbox => checkbox.addEventListener('change', filterPublications));
-	}
-
-	// Initialize on page load
-	initFilters();
-
-	// Re-initialize after page transitions (for Swup navigation)
-	document.addEventListener('astro:page-load', initFilters);
-</script>
-
 <style>
 	.publications-container {
 		display: grid;

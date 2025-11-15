@@ -29,6 +29,114 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 	});
 </script>
 
+<script>
+	// Global initialization function for page-specific features
+	function initPageFeatures() {
+		console.log('initPageFeatures called');
+		
+		// Initialize publication filters if on publications page
+		const yearFilters = document.querySelectorAll('.year-filter');
+		const venueFilters = document.querySelectorAll('.venue-filter');
+		const publicationCards = document.querySelectorAll('.publication-card');
+		
+		if (publicationCards.length > 0) {
+			console.log('Initializing publications filters:', yearFilters.length, 'year filters,', venueFilters.length, 'venue filters,', publicationCards.length, 'cards');
+			
+			function filterPublications() {
+				const selectedYears = Array.from(yearFilters)
+					.filter((f: HTMLInputElement) => f.checked)
+					.map((f: HTMLInputElement) => parseInt(f.dataset.value || '0'));
+				
+				const selectedVenues = Array.from(venueFilters)
+					.filter((f: HTMLInputElement) => f.checked)
+					.map((f: HTMLInputElement) => f.dataset.value || '');
+
+				console.log('Filtering with years:', selectedYears, 'venues:', selectedVenues);
+
+				publicationCards.forEach((card: Element) => {
+					const year = parseInt((card as HTMLElement).dataset.year || '0');
+					const venue = (card as HTMLElement).dataset.venue || '';
+					let show = true;
+
+					if (selectedYears.length > 0) {
+						show = selectedYears.includes(year);
+					}
+
+					if (show && selectedVenues.length > 0) {
+						show = selectedVenues.includes(venue);
+					}
+
+					(card as HTMLElement).style.display = show ? '' : 'none';
+				});
+			}
+
+			yearFilters.forEach((checkbox) => {
+				checkbox.addEventListener('change', filterPublications);
+			});
+			venueFilters.forEach((checkbox) => {
+				checkbox.addEventListener('change', filterPublications);
+			});
+			
+			console.log('Publications filter listeners attached');
+		}
+		
+		// Initialize show more buttons if on people page
+		const bioContainers = document.querySelectorAll('.person-bio-container');
+		
+		if (bioContainers.length > 0) {
+			console.log('Initializing people page show more buttons:', bioContainers.length, 'containers');
+			
+			bioContainers.forEach((container: Element) => {
+				const bio = container.querySelector('.person-bio');
+				const btn = container.querySelector('.show-more-btn');
+				
+				(container as Element).classList.remove('has-overflow');
+				
+				if (bio && bio.scrollHeight > bio.clientHeight) {
+					(container as Element).classList.add('has-overflow');
+					
+					if (btn) {
+						const newBtn = btn.cloneNode(true) as HTMLElement;
+						btn.parentNode?.replaceChild(newBtn, btn);
+						
+						newBtn.addEventListener('click', function() {
+							const isExpanded = bio.classList.contains('expanded');
+							bio.classList.toggle('expanded');
+							newBtn.textContent = isExpanded ? 'Show more' : 'Show less';
+						});
+					}
+				}
+			});
+			
+			console.log('People page show more buttons initialized');
+		}
+	}
+
+	// Run on initial page load
+	if (document.readyState === 'complete') {
+		initPageFeatures();
+	} else {
+		document.addEventListener('DOMContentLoaded', initPageFeatures);
+	}
+
+	// Re-run after Swup page transitions
+	if (window.swup) {
+		window.swup.hooks.on('page:view', () => {
+			console.log('Swup page:view event - reinitializing features');
+			// Use requestAnimationFrame to ensure DOM is updated
+			requestAnimationFrame(initPageFeatures);
+		});
+	} else {
+		document.addEventListener('swup:enable', () => {
+			console.log('Swup enabled - registering page:view hook');
+			window.swup?.hooks.on('page:view', () => {
+				console.log('Swup page:view event - reinitializing features');
+				requestAnimationFrame(initPageFeatures);
+			});
+		});
+	}
+</script>
+
 <App {title} {subtitle} {description} {article} author={typeof config.author == "string" ? config.author : config.author.name}>
 	<Tip client:load>
 		<Icon name="lucide:info" slot="information" is:inline />
