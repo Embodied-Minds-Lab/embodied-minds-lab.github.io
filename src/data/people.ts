@@ -145,7 +145,7 @@ export const people = [
             github: "https://github.com/amanikiruga"
         }
     },
-    {
+	{
 		name: "Hang Le",
 		position: "PhD Student",
 		image: "/people/hangle.jpg",
@@ -153,6 +153,19 @@ export const people = [
 		research: "Hang Le is interested in building embodied agents that can learn to understand and interact with the physical world, and have sufficient sensorimotor skills to follow complex instructions and adapt to diverse environments.",
 		links: {
 			website: "https://kempnerinstitute.harvard.edu/people/our-people/hang-le/",
+		}
+	},
+	{
+		name: "Aayush Karan",
+		position: "PhD Student",
+		image: "/people/aayush.jpg",
+		bio: "Aayush Karan is a third-year Ph.D. student in Computer Science at Harvard, advised by Prof. Sitan Chen and Prof. Yilun Du. He graduated from Harvard University in 2023 with an AB in Physics and Mathematics and an SM in Computer Science. Prior to his Ph.D., Aayush conducted research in pure mathematics with Dr. Jianfeng Lin and Dr. Paul Terwilliger and developed RNA structure prediction algorithms with Dr. Elena Rivas.",
+		research: "Aayush's research broadly targets the foundations of generative models, focusing on delivering algorithmic insights that enhance intelligent capabilities such as reasoning, reward optimization, and failure prediction.",
+		links: {
+			website: "https://aakaran.github.io/",
+			email: "akaran1@g.harvard.edu",
+			twitter: "https://x.com/aakaran31",
+			scholar: "https://scholar.google.com/citations?user=L0SIifMAAAAJ&hl=en",
 		}
 	},
 	{
