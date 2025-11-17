@@ -191,7 +191,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		transition: max-height 0.3s ease;
 	}
 
-	.person-bio:not(.expanded)::after {
+	.person-bio-container.has-overflow .person-bio:not(.expanded)::after {
 		content: "";
 		position: absolute;
 		bottom: 0;
