@@ -59,13 +59,27 @@ export const people = [
 		position: "Postdoc",
 		image: "/people/oscar.jpg",
 		bio: "Wenhui (Oscar) Huang is a postdoctoral researcher at Harvard University, co-advised by Yilun Du and Heng Yang. He received his Ph.D. from Nanyang Technological University and his Master's degree from Politecnico di Milano.",
-		research: "His research focuses on generative AI (GenAI), vision–language models (VLMs), and vision–language–action models (VLAs), with an emphasis on their applications in the physical world, particularly in robot learning and autonomous driving.",
+		research: "His research focuses on generative AI (GenAI), vision-language models (VLMs), and vision-language-action models (VLAs), with an emphasis on their applications in the physical world, particularly in robot learning and autonomous driving.",
 		links: {
 			website: "https://oscarhuangwind.github.io/",
 			email: "oscarhuang@seas.harvard.edu",
 			twitter: "https://x.com/WenhuiOscar",
 			scholar: "https://scholar.google.com/citations?user=Hpatee0AAAAJ&hl=en",
 			github: "https://github.com/OscarHuangWind"
+		}
+	},
+	{
+		name: "Anand Gopalakrishnan",
+		position: "Postdoc",
+		image: "/people/anand.jpg",
+		bio: "Anand Gopalakrishnan is a Postdoctoral Fellow in AI and Cognitive Science jointly advised by Yilun Du and Samuel Gershman at Harvard University. He received his PhD in Informatics from USI Lugano (Switzerland) advised by Jürgen Schmidhuber.",
+		research: "Anand's research is broadly centered around deep learning and representation learning with a focus on modularity and compositionality. Psychological studies, cognitive and neuroscientific theories on human perception like attentional gaze, saliency, object perception, binding, relational reasoning, categorization etc. inform his design of computational models. He is deeply fascinated by both natural and artificial intelligence and wishes to distill the essential computational principles from the human mind to build more human-like AI.",
+		links: {
+			website: "https://agopal42.github.io/",
+			email: "anand_gopalakrishnan@g.harvard.edu",
+			twitter: "https://twitter.com/agopal42",
+			scholar: "https://scholar.google.com/citations?user=SsbgJ1UAAAAJ&hl=en",
+			github: "https://github.com/agopal42"
 		}
 	},
 	// PhD Students
