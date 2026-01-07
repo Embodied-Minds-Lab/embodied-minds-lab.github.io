@@ -91,6 +91,14 @@ Each publication file should include frontmatter with:
 - year
 - links (paper, project page, etc.)
 
+New publications can be added by the authors via pull request. Steps are the following:
+- Create a personal fork of the repo
+- Update the remote to track the original repo as upstream (`git remote add upstream git@github.com:Embodied-Minds-Lab/embodied-minds-lab.github.io`)
+- Create a new branch `git checkout -b new_pub`
+- Update your new publication (create a new `.md` file with a unique identifier, and add a corresponding gif or image) 
+- Run locally to confirm there are no issues
+- Publish the PR and notify an administrator
+
 ## 🚀 Deployment
 
 The site is automatically deployed to GitHub Pages via GitHub Actions when changes are pushed to the `main` branch.
