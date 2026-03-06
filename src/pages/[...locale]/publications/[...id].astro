@@ -33,7 +33,7 @@ const t = i18nit(locale);
 				{
 					<span>
 						<Icon name="lucide:users" />
-						{publication.data.authors.join(", ")}
+						<span set:html={publication.data.authors.join(", ")} />
 					</span>
 				}
 				{

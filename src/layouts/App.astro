@@ -38,8 +38,8 @@ const { title, subtitle, description, author, article } = Astro.props;
 		{Astro.currentLocale === "ko" && <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />}
 
 		<script is:inline>
-			var theme = localStorage.getItem("theme");
-			if (theme) document.documentElement.dataset.theme = theme;
+			// Always use light theme
+			document.documentElement.dataset.theme = "light";
 		</script>
 	</head>
 	<body>

@@ -71,7 +71,6 @@
 	</header>
 
 	<footer class="flex flex-col gap-2 sm:gap-5 sm:(flex-row gap-7)">
-		<ThemeSwitcher {sun} {moon} />
 	</footer>
 </nav>
 
@@ -82,7 +81,6 @@
 	import { getRelativeLocaleUrl } from "astro:i18n";
 	import { onMount, type Snippet } from "svelte";
 	import i18nit from "$i18n";
-	import ThemeSwitcher from "./ThemeSwitcher.svelte";
 
 	let { locale, route, baseUrl = '', home, note, jotting, people, about, sun, moon, bars, close }: { locale: string; route: string; baseUrl?: string } & { [key: string]: Snippet } = $props();
 
