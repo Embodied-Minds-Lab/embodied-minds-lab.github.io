@@ -206,73 +206,73 @@ export const people = [
 		}
 	},
 	// Visiting Researchers
-	{
-		name: "Jiawei Gao",
-		position: "Visiting Researcher",
-		image: "/people/jiawei.jpg",
-		bio: "Jiawei Gao is an undergraduate at Tsinghua University. Previously he worked at CMU RI.",
-		research: "He focuses on learning physics-structured world models for robotics and cognitive-science inspired robot learning.",
-		links: {
-			website: "https://gao-jiawei.com/",
-			email: "jiawei_gao@seas.harvard.edu",
-			twitter: "https://twitter.com/WinstonGu_",
-			scholar: "https://scholar.google.com/citations?hl=en&user=NJxUNrcAAAAJ",
-			github: "https://github.com/Winston-Gu"
-		}
-	},
-	{
-		name: "Runhan Huang",
-		position: "Visiting Researcher",
-		image: "/people/runhan.jpg",
-		bio: "Runhan Huang is a senior student at Tsinghua University, Yao Class. In the spring of 2025, he served as a research intern in Professor Du's laboratory. Prior to that, he worked as a research assistant at both the Shanghai Qizhi Institute and Tsinghua University.",
-		research: "His research interests lie at the intersection of robotics and generative AI. He aims to build generalizable embodied agents that enable robust and adaptive interaction and planning in complex real-world environments.",
-		links: {
-			website: "https://hrh6666.github.io/",
-			email: "hrh22@mails.tsinghua.edu.cn",
-			twitter: "https://x.com/RunhanH?s=21",
-			scholar: "https://scholar.google.com/citations?user=7N0VoNsAAAAJ&hl=en",
-			github: "https://github.com/hrh6666/"
-		}
-	},
-	{
-		name: "Xiaoshen Han",
-		position: "Visiting Researcher",
-		image: "/people/xiaoshen.jpg",
-		bio: "Xiaoshen Han is a final-year undergraduate student in the IEEE Honor Class at Shanghai Jiao Tong University, majoring in Computer Science. He is now a visiting undergraduate intern at Kempner Institute, advised by Prof. Yilun Du.",
-		research: "His research interest lies in reinforcement learning, robotics, and sim-to-real. He is passionate about designing novel algorithms that enable robots to tackle more challenging tasks and generalize across a broader range of tasks.",
-		links: {
-			website: "https://xshenhan.github.io/",
-			email: "xiaoshen_han@seas.harvard.edu",
-			twitter: "https://x.com/xshenhan",
-			scholar: "https://scholar.google.com/citations?user=Mo8I5WMAAAAJ&hl=en&authuser=2",
-			github: "https://github.com/xshenhan/"
-		}
-	},
-	{
-		name: "Chaoqi Liu",
-		position: "Visiting Researcher",
-		image: "/people/chaoqi.jpg",
-		bio: "Chaoqi Liu is an undergraduate student at the University of Illinois Urbana-Champaign. He is currently a visiting student intern at the lab, where he works on research in robotics.",
-		research: "Chaoqi is broadly interested in robotic manipulation. His past research has included structured policy learning and dynamics/world model learning, and he is currently focusing on action representation learning for robot policies.",
-		links: {
-			website: "https://chaoqi-liu.com/",
-			email: "chaoqil2@illinois.edu",
-			twitter: "https://x.com/liu730chaoqi",
-			scholar: "https://scholar.google.com/citations?user=1m-MAYkAAAAJ&hl=en&authuser=1",
-			github: "https://scholar.google.com/citations?user=1m-MAYkAAAAJ&hl=en&authuser=1"
-		}
-	},
-	{
-		name: "Peilin Wu",
-		position: "Visiting Researcher",
-		image: "/people/peilin.jpg",
-		bio: "Peilin Wu is a senior visiting undergraduate from Shanghai Jiao Tong University, currently working with Professor Yilun on multimodal world models.",
-		research: "Peilin is broadly interested in robotics and machine learning. Specifically, she's focusing on constructing comprehensive world models for robot decision-making, which can integrate information from diverse modalities and learn from interactions with the real world. She also has experience working with quadruped robots and reinforcement learning.",
-		links: {
-			website: "https://peilinwu.site/",
-			email: "peilin_wu@seas.harvard.edu",
-			scholar: "https://scholar.google.com/citations?user=6SDlKqwAAAAJ&hl=zh-CN",
-		}
-	},
+	// {
+	// 	name: "Jiawei Gao",
+	// 	position: "Visiting Researcher",
+	// 	image: "/people/jiawei.jpg",
+	// 	bio: "Jiawei Gao is an undergraduate at Tsinghua University. Previously he worked at CMU RI.",
+	// 	research: "He focuses on learning physics-structured world models for robotics and cognitive-science inspired robot learning.",
+	// 	links: {
+	// 		website: "https://gao-jiawei.com/",
+	// 		email: "jiawei_gao@seas.harvard.edu",
+	// 		twitter: "https://twitter.com/WinstonGu_",
+	// 		scholar: "https://scholar.google.com/citations?hl=en&user=NJxUNrcAAAAJ",
+	// 		github: "https://github.com/Winston-Gu"
+	// 	}
+	// },
+	// {
+	// 	name: "Runhan Huang",
+	// 	position: "Visiting Researcher",
+	// 	image: "/people/runhan.jpg",
+	// 	bio: "Runhan Huang is a senior student at Tsinghua University, Yao Class. In the spring of 2025, he served as a research intern in Professor Du's laboratory. Prior to that, he worked as a research assistant at both the Shanghai Qizhi Institute and Tsinghua University.",
+	// 	research: "His research interests lie at the intersection of robotics and generative AI. He aims to build generalizable embodied agents that enable robust and adaptive interaction and planning in complex real-world environments.",
+	// 	links: {
+	// 		website: "https://hrh6666.github.io/",
+	// 		email: "hrh22@mails.tsinghua.edu.cn",
+	// 		twitter: "https://x.com/RunhanH?s=21",
+	// 		scholar: "https://scholar.google.com/citations?user=7N0VoNsAAAAJ&hl=en",
+	// 		github: "https://github.com/hrh6666/"
+	// 	}
+	// },
+	// {
+	// 	name: "Xiaoshen Han",
+	// 	position: "Visiting Researcher",
+	// 	image: "/people/xiaoshen.jpg",
+	// 	bio: "Xiaoshen Han is a final-year undergraduate student in the IEEE Honor Class at Shanghai Jiao Tong University, majoring in Computer Science. He is now a visiting undergraduate intern at Kempner Institute, advised by Prof. Yilun Du.",
+	// 	research: "His research interest lies in reinforcement learning, robotics, and sim-to-real. He is passionate about designing novel algorithms that enable robots to tackle more challenging tasks and generalize across a broader range of tasks.",
+	// 	links: {
+	// 		website: "https://xshenhan.github.io/",
+	// 		email: "xiaoshen_han@seas.harvard.edu",
+	// 		twitter: "https://x.com/xshenhan",
+	// 		scholar: "https://scholar.google.com/citations?user=Mo8I5WMAAAAJ&hl=en&authuser=2",
+	// 		github: "https://github.com/xshenhan/"
+	// 	}
+	// },
+	// {
+	// 	name: "Chaoqi Liu",
+	// 	position: "Visiting Researcher",
+	// 	image: "/people/chaoqi.jpg",
+	// 	bio: "Chaoqi Liu is an undergraduate student at the University of Illinois Urbana-Champaign. He is currently a visiting student intern at the lab, where he works on research in robotics.",
+	// 	research: "Chaoqi is broadly interested in robotic manipulation. His past research has included structured policy learning and dynamics/world model learning, and he is currently focusing on action representation learning for robot policies.",
+	// 	links: {
+	// 		website: "https://chaoqi-liu.com/",
+	// 		email: "chaoqil2@illinois.edu",
+	// 		twitter: "https://x.com/liu730chaoqi",
+	// 		scholar: "https://scholar.google.com/citations?user=1m-MAYkAAAAJ&hl=en&authuser=1",
+	// 		github: "https://scholar.google.com/citations?user=1m-MAYkAAAAJ&hl=en&authuser=1"
+	// 	}
+	// },
+	// {
+	// 	name: "Peilin Wu",
+	// 	position: "Visiting Researcher",
+	// 	image: "/people/peilin.jpg",
+	// 	bio: "Peilin Wu is a senior visiting undergraduate from Shanghai Jiao Tong University, currently working with Professor Yilun on multimodal world models.",
+	// 	research: "Peilin is broadly interested in robotics and machine learning. Specifically, she's focusing on constructing comprehensive world models for robot decision-making, which can integrate information from diverse modalities and learn from interactions with the real world. She also has experience working with quadruped robots and reinforcement learning.",
+	// 	links: {
+	// 		website: "https://peilinwu.site/",
+	// 		email: "peilin_wu@seas.harvard.edu",
+	// 		scholar: "https://scholar.google.com/citations?user=6SDlKqwAAAAJ&hl=zh-CN",
+	// 	}
+	// },
 ];
 
