@@ -169,20 +169,6 @@ export const people = [
 			scholar: "https://scholar.google.com/citations?user=L0SIifMAAAAJ&hl=en",
 		}
 	},
-	{
-		name: "Hansen Lillemark",
-		position: "Visiting PhD Student",
-		image: "/people/hansen.jpg",
-		bio: "Hansen Lillemark is currently a second year PhD student at UC San Diego advised by Profs. Rose Yu and Taylor Berg-Kirkpatrick. He previously studied CS at UC Berkeley, advised by Prof. Bruno Olshausen and Kurt Keutzer, and in a past life, founded a financial technology startup.",
-		research: "Hansen's current research is focused on memory in world models: how can a generative model selectively compress previous observations and information into an opinionated world state, and use this memory for predicting the future? More broadly, he is interested in incorporating concepts from neuroscience such as grid and place cells into generative modeling.",
-		links: {
-			website: "https://hansenlillemark.com",
-			email: "hlillemark@ucsd.edu",
-			twitter: "https://x.com/hansenlillemark",
-			scholar: "https://scholar.google.com/citations?user=X_mcf_EAAAAJ&hl=en",
-			github: "https://github.com/hlillemark"
-		}
-	},
 	// Post-bacc
 	{
 		name: "Zoe Wu",
