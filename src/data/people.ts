@@ -54,20 +54,7 @@ export const people = [
 			github: "https://github.com/YeWR/"
 		}
 	},
-	{
-		name: "Wenhui (Oscar) Huang",
-		position: "Postdoc",
-		image: "/people/oscar.jpg",
-		bio: "Wenhui (Oscar) Huang is a postdoctoral researcher at Harvard University, co-advised by Yilun Du and Heng Yang. He received his Ph.D. from Nanyang Technological University and his Master's degree from Politecnico di Milano.",
-		research: "His research focuses on generative AI (GenAI), vision-language models (VLMs), and vision-language-action models (VLAs), with an emphasis on their applications in the physical world, particularly in robot learning and autonomous driving.",
-		links: {
-			website: "https://oscarhuangwind.github.io/",
-			email: "oscarhuang@seas.harvard.edu",
-			twitter: "https://x.com/WenhuiOscar",
-			scholar: "https://scholar.google.com/citations?user=Hpatee0AAAAJ&hl=en",
-			github: "https://github.com/OscarHuangWind"
-		}
-	},
+	
 	{
 		name: "Anand Gopalakrishnan",
 		position: "Postdoc",
