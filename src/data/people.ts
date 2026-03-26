@@ -17,7 +17,7 @@ export const people = [
 	// Postdocs
 	{
 		name: "Ruojin Cai",
-		position: "Postdoc",
+		position: "Kempner Research Fellow",
 		image: "/people/ruojin.jpg",
 		bio: "Ruojin Cai is a Postdoctoral Research Fellow at the Kempner Institute for the Study of Natural and Artificial Intelligence at Harvard University, working with Professor Yilun Du. She received her Ph.D. in Computer Science from Cornell University, co-advised by Professors Bharath Hariharan and Noah Snavely, and holds a B.S. in Computer Science from Tsinghua University.",
 		research: "Ruojin's research focuses on 3D computer vision and spatial intelligence, developing generative and multimodal foundation models to enhance 3D reconstruction and understanding.",
@@ -40,21 +40,6 @@ export const people = [
 			scholar: "https://scholar.google.com/citations?hl=en&user=SomOgNIAAAAJ",
 		}
 	},
-	{
-		name: "Weirui Ye",
-		position: "Postdoc",
-		image: "/people/weirui.jpg",
-		bio: "Weirui Ye is a Postdoc Fellow in LIS Group at MIT CSAIL, working with Prof. Leslie Pack Kaelbling and Tomás Lozano-Pérez at MIT and Yilun Du at Harvard. Previously, he received his Ph.D. from Tsinghua University under the supervision of Prof. Yang Gao. During his Ph.D., he also worked as a visiting scholar at UC Berkeley advised by Prof. Pieter Abbeel.",
-		research: "His research goal is to develop human-level policy learning algorithms for robots in learning efficiency and generalization. He is interested in Reinforcement Learning, Generative World Models and Lifelong Learning for Robots.",
-		links: {
-			website: "https://yewr.github.io/",
-			email: "ywr@csail.mit.edu",
-			twitter: "https://x.com/Weirui_Ye",
-			scholar: "https://scholar.google.com/citations?user=_GgST9AAAAAJ&hl=en",
-			github: "https://github.com/YeWR/"
-		}
-	},
-	
 	{
 		name: "Anand Gopalakrishnan",
 		position: "Postdoc",
@@ -96,16 +81,6 @@ export const people = [
 			scholar: "https://scholar.google.com/citations?user=ELPn5DsAAAAJ&hl=en&oi=ao",
 		}
 	},
-	{
-		name: "Zhiyi Li",
-		position: "PhD Student",
-		image: "/people/zhiyi.jpg",
-		bio: "Zhiyi Li is a PhD student at MIT EECS advised by Yilun Du. He graduated from Tsinghua University with a major in electronic engineering.",
-		research: "He is interested in exploring generative modeling for embodied agents to understand and interact with the world.",
-		links: {
-			email: "zhiyi24@mit.edu",
-		}
-	},
     {
 		name: "Sarah Liaw",
 		position: "PhD Student",
@@ -117,20 +92,6 @@ export const people = [
 			email: "sliaw@g.harvard.edu",
 			scholar: "https://scholar.google.com/citations?user=4sjEdTMAAAAJ&hl=en",
 			github: "https://github.com/SarahLiaw"
-		}
-	},
-	{
-		name: "Haoyu Xiong",
-		position: "PhD Student",
-		image: "/people/haoyu.jpg",
-		bio: "Haoyu Xiong is a PhD student at MIT EECS, co-advised by Prof. Antonio Torralba and Prof. Yilun Du.",
-		research: "He is interested in Robot Learning.",
-		links: {
-			website: "https://haoyu-x.github.io/",
-			email: "haoyux2@mit.edu",
-			twitter: "https://x.com/Haoyu_Xiong_",
-			scholar: "https://scholar.google.com/citations?user=iGfCCEYAAAAJ&hl=en&oi=ao",
-			github: "https://github.com/haoyu-x"
 		}
 	},
     {
@@ -167,6 +128,44 @@ export const people = [
 			email: "akaran1@g.harvard.edu",
 			twitter: "https://x.com/aakaran31",
 			scholar: "https://scholar.google.com/citations?user=L0SIifMAAAAJ&hl=en",
+		}
+	},
+	{
+		name: "Weirui Ye",
+		position: "MIT Postdoc",
+		image: "/people/weirui.jpg",
+		bio: "Weirui Ye is a Postdoc Fellow in LIS Group at MIT CSAIL, working with Prof. Leslie Pack Kaelbling and Tomás Lozano-Pérez at MIT and Yilun Du at Harvard. Previously, he received his Ph.D. from Tsinghua University under the supervision of Prof. Yang Gao. During his Ph.D., he also worked as a visiting scholar at UC Berkeley advised by Prof. Pieter Abbeel.",
+		research: "His research goal is to develop human-level policy learning algorithms for robots in learning efficiency and generalization. He is interested in Reinforcement Learning, Generative World Models and Lifelong Learning for Robots.",
+		links: {
+			website: "https://yewr.github.io/",
+			email: "ywr@csail.mit.edu",
+			twitter: "https://x.com/Weirui_Ye",
+			scholar: "https://scholar.google.com/citations?user=_GgST9AAAAAJ&hl=en",
+			github: "https://github.com/YeWR/"
+		}
+	},
+	{
+		name: "Zhiyi Li",
+		position: "MIT PhD Student",
+		image: "/people/zhiyi.jpg",
+		bio: "Zhiyi Li is a PhD student at MIT EECS advised by Yilun Du. He graduated from Tsinghua University with a major in electronic engineering.",
+		research: "He is interested in exploring generative modeling for embodied agents to understand and interact with the world.",
+		links: {
+			email: "zhiyi24@mit.edu",
+		}
+	},
+	{
+		name: "Haoyu Xiong",
+		position: "MIT PhD Student",
+		image: "/people/haoyu.jpg",
+		bio: "Haoyu Xiong is a PhD student at MIT EECS, co-advised by Prof. Antonio Torralba and Prof. Yilun Du.",
+		research: "He is interested in Robot Learning.",
+		links: {
+			website: "https://haoyu-x.github.io/",
+			email: "haoyux2@mit.edu",
+			twitter: "https://x.com/Haoyu_Xiong_",
+			scholar: "https://scholar.google.com/citations?user=iGfCCEYAAAAJ&hl=en&oi=ao",
+			github: "https://github.com/haoyu-x"
 		}
 	},
 	// Post-bacc
