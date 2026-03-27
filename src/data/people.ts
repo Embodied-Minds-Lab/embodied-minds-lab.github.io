@@ -273,5 +273,19 @@ export const people = [
 	// 		scholar: "https://scholar.google.com/citations?user=6SDlKqwAAAAJ&hl=zh-CN",
 	// 	}
 	// },
+	{
+		name: "Guowei Xu",
+		position: "Visiting Researcher",
+		image: "/people/guowei.jpg",
+		bio: "",
+		research: "",
+		links: {
+			website: "https://guoweixu.com",
+			email: "kevin.guowei.xu+harvard@gmail.com",
+			twitter: "https://x.com/Kevin_GuoweiXu",
+			scholar: "https://scholar.google.com/citations?user=7xKdIM4AAAAJ&hl=en",
+			github: "https://github.com/XuGW-Kevin"
+		}
+	},
 ];
 
