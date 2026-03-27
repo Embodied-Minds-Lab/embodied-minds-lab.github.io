@@ -277,8 +277,8 @@ export const people = [
 		name: "Guowei Xu",
 		position: "Visiting Researcher",
 		image: "/people/guowei.jpg",
-		bio: "",
-		research: "",
+		bio: "Guowei Xu is a junior student at Yao Class, Tsinghua University. He is honored to be a visiting student intern supervised by Yilun.",
+		research: "His research interests lie in enhancing the reasoning capabilities of AI systems, with a recent focus on language models and agents.",
 		links: {
 			website: "https://guoweixu.com",
 			email: "kevin.guowei.xu+harvard@gmail.com",
