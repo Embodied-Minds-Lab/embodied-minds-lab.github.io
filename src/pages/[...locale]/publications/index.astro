@@ -17,39 +17,47 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 
 const publications = await getCollection("publications", publication => !publication.data.draft);
 
-// Priority venues to show at the top
+// Canonical venue names — maps scraped variants to the display name used everywhere
+const VENUE_CANONICAL: Record<string, string> = {
+	'arXiv': 'arXiv Preprint',
+	'bioRxiv': 'bioRxiv Preprint',
+	'CORL': 'CoRL',
+	'Corl': 'CoRL',
+	'Neurips': 'NeurIPS',
+	'neurips': 'NeurIPS',
+	'CVPR ': 'CVPR',
+};
+
+// Strip trailing year + any qualifier like (Oral)/(Spotlight), then apply canonical map
+function normalizeVenue(raw: string): string {
+	const stripped = raw.replace(/\s+20\d{2}.*$/, '').trim();
+	return VENUE_CANONICAL[stripped] ?? stripped;
+}
+
+// Priority venues to show at the top of the filter
 const priorityVenues = ["arXiv Preprint", "NeurIPS", "ICLR", "ICML", "RSS", "CoRL", "CVPR", "ICCV", "ECCV", "CoLM"];
 
-// Helper function to get venue priority (lower number = higher priority)
 const getVenuePriority = (venue: string) => {
-	const index = priorityVenues.indexOf(venue);
+	const index = priorityVenues.indexOf(normalizeVenue(venue));
 	return index === -1 ? priorityVenues.length : index;
 };
 
-// Sort publications by: 1) year (newest first), 2) venue (priority order), 3) title (alphabetically)
+// Sort by: year desc → venue priority → venue name → title
 const sortedPublications = publications.sort((a, b) => {
-	// First, sort by year (newest first)
-	if (b.data.year !== a.data.year) {
-		return b.data.year - a.data.year;
+	if (b.data.year !== a.data.year) return b.data.year - a.data.year;
+	const pa = getVenuePriority(a.data.venue);
+	const pb = getVenuePriority(b.data.venue);
+	if (pa !== pb) return pa - pb;
+	if (pa === priorityVenues.length) {
+		const vc = normalizeVenue(a.data.venue).localeCompare(normalizeVenue(b.data.venue));
+		if (vc !== 0) return vc;
 	}
-	// Second, sort by venue priority
-	const venuePriorityA = getVenuePriority(a.data.venue);
-	const venuePriorityB = getVenuePriority(b.data.venue);
-	if (venuePriorityA !== venuePriorityB) {
-		return venuePriorityA - venuePriorityB;
-	}
-	// If same priority or both non-priority, sort alphabetically by venue name
-	if (venuePriorityA === venuePriorityB && venuePriorityA === priorityVenues.length) {
-		const venueCompare = a.data.venue.localeCompare(b.data.venue);
-		if (venueCompare !== 0) return venueCompare;
-	}
-	// Finally, sort by title alphabetically
 	return a.data.title.localeCompare(b.data.title);
 });
 
-// Get unique years and venues for filtering
+// Build deduplicated, normalized venue list for the filter sidebar
 const years = Array.from(new Set(publications.map(pub => pub.data.year))).sort((a, b) => b - a);
-const allVenues = Array.from(new Set(publications.map(pub => pub.data.venue).filter(Boolean)));
+const allVenues = Array.from(new Set(publications.map(pub => normalizeVenue(pub.data.venue)).filter(Boolean)));
 const topVenues = priorityVenues.filter(v => allVenues.includes(v));
 const otherVenues = allVenues.filter(v => !priorityVenues.includes(v)).sort();
 const venues = [...topVenues, ...otherVenues];
@@ -64,7 +72,7 @@ const venues = [...topVenues, ...otherVenues];
 			<div class="publications-main">
 				<div class="publications-grid">
 					{sortedPublications.map((pub) => (
-						<article class="publication-card" data-year={pub.data.year} data-venue={pub.data.venue}>
+						<article class="publication-card" data-year={pub.data.year} data-venue={normalizeVenue(pub.data.venue)}>
 						<div class="publication-image">
 							{pub.data.image ? (
 								<img src={`${baseUrl}${pub.data.image.replace(/^\//, '')}`} alt={pub.data.title} loading="lazy" />
@@ -79,7 +87,7 @@ const venues = [...topVenues, ...otherVenues];
 								<h2 class="publication-title">{pub.data.title}</h2>
 								
 							<p class="publication-venue">
-								<strong>{pub.data.venue}</strong>
+								<strong>{normalizeVenue(pub.data.venue)}</strong>
 								{pub.data.year && ` • ${pub.data.year}`}
 								{pub.data.award && <span class="award-badge">{pub.data.award}</span>}
 							</p>
@@ -397,4 +405,21 @@ const venues = [...topVenues, ...otherVenues];
 		}
 	}
 </style>
+
+<script>
+	const cards = Array.from(document.querySelectorAll<HTMLElement>('.publication-card'));
+
+	function applyFilters() {
+		const checkedVenues = Array.from(document.querySelectorAll<HTMLInputElement>('.venue-filter:checked')).map(el => el.dataset.value!);
+		const checkedYears = Array.from(document.querySelectorAll<HTMLInputElement>('.year-filter:checked')).map(el => el.dataset.value!);
+
+		for (const card of cards) {
+			const venueMatch = checkedVenues.length === 0 || checkedVenues.includes(card.dataset.venue!);
+			const yearMatch = checkedYears.length === 0 || checkedYears.includes(card.dataset.year!);
+			card.style.display = venueMatch && yearMatch ? '' : 'none';
+		}
+	}
+
+	document.querySelectorAll('.filter-checkbox').forEach(cb => cb.addEventListener('change', applyFilters));
+</script>
 
