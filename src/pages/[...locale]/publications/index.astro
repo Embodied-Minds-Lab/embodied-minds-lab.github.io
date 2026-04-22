@@ -35,7 +35,7 @@ function normalizeVenue(raw: string): string {
 }
 
 // Priority venues to show at the top of the filter
-const priorityVenues = ["arXiv Preprint", "NeurIPS", "ICLR", "ICML", "RSS", "CoRL", "CVPR", "ICCV", "ECCV", "CoLM"];
+const priorityVenues = ["NeurIPS", "ICLR", "ICML", "RSS", "CoRL", "CVPR", "ICCV", "ECCV", "CoLM", "arXiv Preprint"];
 
 const getVenuePriority = (venue: string) => {
 	const index = priorityVenues.indexOf(normalizeVenue(venue));
