@@ -14,38 +14,52 @@ def clean_filename(filename):
     """Clean filename to be filesystem safe"""
     return re.sub(r'[^\w\-_.]', '_', filename)
 
-def scrape_publications():
+def get_existing_titles(content_dir="src/content/publications/en"):
+    """Return set of titles already present in the content directory."""
+    titles = set()
+    path = Path(content_dir)
+    if not path.exists():
+        return titles
+    for md_file in path.glob("*.md"):
+        content = md_file.read_text(encoding='utf-8')
+        match = re.search(r'^title:\s*"(.*?)"', content, re.MULTILINE)
+        if match:
+            titles.add(match.group(1).replace('\\"', '"'))
+    return titles
+
+
+def scrape_publications(existing_titles=None, start_id=0):
+    if existing_titles is None:
+        existing_titles = set()
+
     url = "https://yilundu.github.io/"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
-    
+
     publications = []
-    
-    # Find all publication entries - they are in a specific structure
-    # Each publication is typically in a row with an image on the left and text on the right
-    # Let's look for the pattern more carefully
-    
-    # Strategy: Find all h5 elements (publication titles) and work from there
+    new_id = start_id
+
     pub_headers = soup.find_all('h5')
-    
-    for idx, header in enumerate(pub_headers):
+
+    for header in pub_headers:
         try:
-            # Get title
             title = header.get_text(strip=True)
-            
-            # Skip if this is not a publication (e.g., section headers)
-            if title in ['News', 'Research Highlights', 'Publications']:
+
+            # Skip section headers and the JS toggle line
+            if title in ['News', 'Research Highlights'] or title.startswith('Publications'):
                 continue
-            
-            # Get the next sibling which should be h6 with authors
+
+            # Skip already-scraped publications
+            if title in existing_titles:
+                continue
+
+            # Authors
             authors_elem = header.find_next_sibling('h6')
             authors = []
             if authors_elem:
-                authors_text = authors_elem.get_text(strip=True)
-                # Split by comma and clean up
-                authors = [a.strip() for a in authors_text.split(',')]
-            
-            # Get links (Website, Paper, Code, etc.)
+                authors = [a.strip() for a in authors_elem.get_text(strip=True).split(',')]
+
+            # Links
             links = {}
             links_elem = header.find_next_sibling('p')
             if links_elem:
@@ -53,56 +67,27 @@ def scrape_publications():
                     link_text = link.get_text(strip=True)
                     link_url = link.get('href', '')
                     links[link_text.lower().replace(' ', '_').replace('/', '_')] = link_url
-            
-            # Get venue and year from the first paragraph
+
+            # Venue and year
             venue_elem = header.find_next('p')
             venue = ""
-            year = 2024  # default
-            
+            year = 2024
+
             if venue_elem:
                 venue_text = venue_elem.get_text(strip=True)
-                # Try to extract year
                 year_match = re.search(r'(20\d{2})', venue_text)
                 if year_match:
                     year = int(year_match.group(1))
-                # Venue is the text before links
                 venue = venue_text.split('/')[0].strip() if '/' in venue_text else venue_text
-            
-            # Find associated image - look in the parent container
-            # Publications are typically in a structure where image and text are siblings
+
+            # Image: the site uses a .row div with .col-l (image) and .col-r (text) siblings
             image_url = None
-            
-            # Try to find parent container (often a row/column structure)
-            parent = header.find_parent()
-            if parent:
-                # Look for img in the parent or previous siblings
-                img = parent.find('img')
+            row_parent = header.find_parent(class_='row')
+            if row_parent:
+                img = row_parent.find('img')
                 if img and img.get('src'):
                     image_url = urljoin(url, img['src'])
-                else:
-                    # Try looking in previous sibling of parent
-                    prev_sibling = parent.find_previous_sibling()
-                    if prev_sibling:
-                        img = prev_sibling.find('img')
-                        if img and img.get('src'):
-                            image_url = urljoin(url, img['src'])
-            
-            # If still no image, try looking for the nearest preceding image
-            if not image_url:
-                # Walk backwards through elements to find an image
-                current = header
-                for _ in range(10):  # Look at most 10 elements back
-                    current = current.find_previous()
-                    if not current:
-                        break
-                    if current.name == 'img' and current.get('src'):
-                        image_url = urljoin(url, current['src'])
-                        break
-                    img = current.find('img')
-                    if img and img.get('src'):
-                        image_url = urljoin(url, img['src'])
-                        break
-            
+
             pub_data = {
                 'title': title,
                 'authors': authors,
@@ -110,15 +95,16 @@ def scrape_publications():
                 'year': year,
                 'links': links,
                 'image_url': image_url,
-                'id': f"pub_{idx:03d}"
+                'id': f"pub_{new_id:03d}"
             }
-            
+
             publications.append(pub_data)
-            
+            new_id += 1
+
         except Exception as e:
-            print(f"Error processing publication {idx}: {e}")
+            print(f"Error processing publication '{title[:60]}': {e}")
             continue
-    
+
     return publications
 
 def download_images(publications, output_dir="public/publications"):
@@ -185,9 +171,21 @@ image: "{pub.get('image', '')}"
         print(f"Created: {filename}")
 
 def main():
-    print("Scraping publications from https://yilundu.github.io/...")
-    publications = scrape_publications()
-    print(f"Found {len(publications)} publications")
+    content_dir = "src/content/publications/en"
+    existing_titles = get_existing_titles(content_dir)
+    print(f"Found {len(existing_titles)} existing publications — skipping those.")
+
+    # Start new IDs after the highest existing pub_NNN
+    existing_ids = [
+        int(p.stem.split('_')[1])
+        for p in Path(content_dir).glob("pub_*.md")
+        if p.stem.split('_')[1].isdigit()
+    ]
+    start_id = max(existing_ids) + 1 if existing_ids else 0
+
+    print(f"Scraping new publications from https://yilundu.github.io/ (IDs start at pub_{start_id:03d})...")
+    publications = scrape_publications(existing_titles=existing_titles, start_id=start_id)
+    print(f"Found {len(publications)} new publications")
     
     # Save raw data as JSON for reference
     with open('publications_data.json', 'w', encoding='utf-8') as f:

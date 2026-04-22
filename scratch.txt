@@ -1,0 +1,20 @@
+
+{
+    "title": "Flow Equivariant World Models: Memory for Partially Observed Dynamic Environments",
+    "authors": [
+      "Hansen Lillemark",
+      "Benhao Huang",
+      "Fangneng Zhan",
+      "Yilun Du",
+      "T. Anderson Keller"
+    ],
+    "venue": "arXiv Preprint",
+    "year": 2026,
+    "links": {
+      "website": "https://flowequivariantworldmodels.github.io/",
+      "paper": "https://arxiv.org/abs/2601.01075",
+      "code": "https://github.com/hlillemark/flowm"
+    },
+    "image_url": "todo",
+    "id": "todo"
+  },

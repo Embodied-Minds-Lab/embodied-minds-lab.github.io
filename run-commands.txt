@@ -10,3 +10,6 @@ git commit -m "Update website"
 git push origin main
 
 ## and github actions will take care of the rest
+
+# scrape publications 
+python scrape_publications.py
