@@ -1,5 +1,9 @@
 ---
+import config from "$config";
+
 const { title, subtitle, description, author, article } = Astro.props;
+const gaId = (config as { gaMeasurementId?: string }).gaMeasurementId;
+const gaEnabled = !!gaId && /^G-[A-Z0-9]+$/.test(gaId) && gaId !== "G-XXXXXXXXXX";
 ---
 
 <html lang={Astro.currentLocale}>
@@ -41,6 +45,149 @@ const { title, subtitle, description, author, article } = Astro.props;
 			// Always use light theme
 			document.documentElement.dataset.theme = "light";
 		</script>
+
+		{gaEnabled && (
+			<>
+				<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+				<script is:inline define:vars={{ gaId }}>
+					window.dataLayer = window.dataLayer || [];
+					function gtag() { window.dataLayer.push(arguments); }
+					window.gtag = gtag;
+					gtag("js", new Date());
+					// Disable automatic page_view — we send it manually so Swup transitions are tracked.
+					gtag("config", gaId, { send_page_view: false });
+
+					(function () {
+						if (window.__gaTrackingInit) return;
+						window.__gaTrackingInit = true;
+
+						function sendPageView() {
+							gtag("event", "page_view", {
+								page_title: document.title,
+								page_location: window.location.href,
+								page_path: window.location.pathname + window.location.search,
+							});
+						}
+
+						// Initial pageview (full document load).
+						sendPageView();
+
+						// Re-send on every Swup client-side navigation.
+						function bindSwupPageView() {
+							if (!window.swup || !window.swup.hooks) return false;
+							window.swup.hooks.on("page:view", sendPageView);
+							return true;
+						}
+						if (!bindSwupPageView()) {
+							document.addEventListener("swup:enable", bindSwupPageView);
+						}
+
+						var FILE_EXT = /\.(pdf|bib|zip|tar|gz|csv|txt|doc|docx|ppt|pptx|xls|xlsx|json|mp4|mov|wav|mp3)(\?.*)?$/i;
+
+						// Delegated click handler — capture-phase so it survives Swup DOM swaps without rebinding.
+						document.addEventListener("click", function (event) {
+							var target = event.target;
+							if (!(target instanceof Element)) return;
+							var link = target.closest("a");
+							if (!link || !link.href) return;
+
+							var href = link.getAttribute("href") || "";
+							var url;
+							try { url = new URL(link.href, window.location.href); } catch (e) { return; }
+
+							var linkText = (link.innerText || link.textContent || "").trim().slice(0, 100);
+
+							// Mailto
+							if (href.indexOf("mailto:") === 0) {
+								gtag("event", "email_click", {
+									link_url: href,
+									link_text: linkText,
+									page_path: window.location.pathname,
+								});
+								return;
+							}
+
+							// File downloads
+							if (FILE_EXT.test(url.pathname)) {
+								var ext = (url.pathname.match(FILE_EXT) || [, ""])[1].toLowerCase();
+								gtag("event", "file_download", {
+									file_url: url.href,
+									file_name: url.pathname.split("/").pop(),
+									file_extension: ext,
+									link_text: linkText,
+									page_path: window.location.pathname,
+								});
+								// Don't return — also tag outbound below if applicable.
+							}
+
+							// Outbound link
+							var isHttp = url.protocol === "http:" || url.protocol === "https:";
+							if (isHttp && url.hostname && url.hostname !== window.location.hostname) {
+								gtag("event", "click", {
+									outbound: true,
+									link_domain: url.hostname,
+									link_url: url.href,
+									link_text: linkText,
+									page_path: window.location.pathname,
+								});
+							}
+
+							// Publication card click — fires when user clicks anywhere inside an .publication-card link.
+							var card = link.closest(".publication-card");
+							if (card) {
+								gtag("event", "publication_click", {
+									publication_title: (card.querySelector(".publication-title") || {}).textContent || undefined,
+									publication_year: card.getAttribute("data-year") || undefined,
+									publication_venue: card.getAttribute("data-venue") || undefined,
+									link_kind: link.classList.contains("pub-link") ? (linkText || "pub-link") : "card",
+									link_url: url.href,
+								});
+							}
+						}, true);
+
+						// Scroll depth tracking — fires once each at 25/50/75/100% per page.
+						var depthHit = { 25: false, 50: false, 75: false, 100: false };
+						function resetDepth() { depthHit = { 25: false, 50: false, 75: false, 100: false }; }
+						function onScroll() {
+							var doc = document.documentElement;
+							var scrollTop = window.scrollY || doc.scrollTop || 0;
+							var viewport = window.innerHeight || doc.clientHeight || 0;
+							var fullHeight = Math.max(doc.scrollHeight, document.body ? document.body.scrollHeight : 0);
+							var scrollable = fullHeight - viewport;
+							if (scrollable <= 0) return;
+							var pct = Math.min(100, Math.round(((scrollTop + viewport) / fullHeight) * 100));
+							[25, 50, 75, 100].forEach(function (threshold) {
+								if (!depthHit[threshold] && pct >= threshold) {
+									depthHit[threshold] = true;
+									gtag("event", "scroll", {
+										percent_scrolled: threshold,
+										page_path: window.location.pathname,
+									});
+								}
+							});
+						}
+						var scrollTimer = null;
+						window.addEventListener("scroll", function () {
+							if (scrollTimer) return;
+							scrollTimer = window.setTimeout(function () {
+								scrollTimer = null;
+								onScroll();
+							}, 250);
+						}, { passive: true });
+
+						// Reset scroll depth on each Swup navigation.
+						function bindSwupScrollReset() {
+							if (!window.swup || !window.swup.hooks) return false;
+							window.swup.hooks.on("page:view", resetDepth);
+							return true;
+						}
+						if (!bindSwupScrollReset()) {
+							document.addEventListener("swup:enable", bindSwupScrollReset);
+						}
+					})();
+				</script>
+			</>
+		)}
 	</head>
 	<body>
 		<slot />

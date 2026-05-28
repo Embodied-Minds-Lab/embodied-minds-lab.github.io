@@ -95,6 +95,20 @@ export const people = [
 		}
 	},
     {
+		name: "Chloe H. Su",
+		position: "PhD Student",
+		image: "/people/chloe.jpg",
+		bio: "Chloe H. Su is a Ph.D. student in Computer Science at Harvard University and a Kempner Graduate Fellow, advised by Prof. Yilun Du and Prof. Sham Kakade. His work sits at the intersection of robotics, generative models, large language models, and reinforcement learning.",
+		research: "Her research interests lie broadly in robotics, generative models, large language models, and reinforcement learning. She is especially interested in designing algorithms and training paradigms that enable intelligent systems to plan and collaborate effectively, and provide stronger decision-making. More broadly, She aims to develop AI systems that are reliable, adaptive, and capable of operating in complex real-world environments.",
+		links: {
+			website: "https://hither1.github.io/",
+			email: "sliaw@g.harvard.edu",
+			twitter: "https://x.com/Huangyu58589918",
+			scholar: "https://scholar.google.com/citations?user=aSLeTLEAAAAJ&hl=en&oi=ao",
+			github: "https://github.com/Hither1"
+		}
+	},
+    {
         name: "Amani Kiruga",
         position: "PhD Student",
         image: "/people/amani.jpg",

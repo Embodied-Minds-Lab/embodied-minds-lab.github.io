@@ -105,6 +105,12 @@
 					"minimum": 0
 				}
 			}
+		},
+		"gaMeasurementId": {
+			"title": "Google Analytics 4 Measurement ID",
+			"description": "GA4 Measurement ID (e.g. G-XXXXXXXXXX). Leave as G-XXXXXXXXXX or empty to disable analytics.",
+			"type": "string",
+			"pattern": "^(G-[A-Z0-9]+|)$"
 		}
 	},
 	"required": [
