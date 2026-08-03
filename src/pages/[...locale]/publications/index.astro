@@ -34,14 +34,19 @@ function normalizeVenue(raw: string): string {
 	return VENUE_CANONICAL[stripped] ?? stripped;
 }
 
-// Priority venues to show at the top of the filter
 const SHOW_AWARDS = false;
 
+// Ordered by actual conference month (descending) within a shared year: NeurIPS (Dec), CoRL (Nov),
+// ICCV/ECCV/CoLM (Oct), ICML (Jul), RSS (Jun/Jul), CVPR (Jun), ICLR (Apr).
+// Used only to break ties when sorting papers from the same year — NOT the filter sidebar order.
+const venueSortPriority = ["arXiv Preprint", "NeurIPS", "CoRL", "ICCV", "ECCV", "CoLM", "ICML", "RSS", "CVPR", "ICLR"];
+
+// Priority venues to show at the top of the filter sidebar (display order, independent of sort order above)
 const priorityVenues = ["arXiv Preprint", "NeurIPS", "ICLR", "ICML", "RSS", "CoRL", "CVPR", "ICCV", "ECCV", "CoLM"];
 
 const getVenuePriority = (venue: string) => {
-	const index = priorityVenues.indexOf(normalizeVenue(venue));
-	return index === -1 ? priorityVenues.length : index;
+	const index = venueSortPriority.indexOf(normalizeVenue(venue));
+	return index === -1 ? venueSortPriority.length : index;
 };
 
 // Sort by: year desc → venue priority → venue name → title
@@ -50,7 +55,7 @@ const sortedPublications = publications.sort((a, b) => {
 	const pa = getVenuePriority(a.data.venue);
 	const pb = getVenuePriority(b.data.venue);
 	if (pa !== pb) return pa - pb;
-	if (pa === priorityVenues.length) {
+	if (pa === venueSortPriority.length) {
 		const vc = normalizeVenue(a.data.venue).localeCompare(normalizeVenue(b.data.venue));
 		if (vc !== 0) return vc;
 	}
