@@ -5,6 +5,11 @@ const { title, subtitle, description, author, article } = Astro.props;
 const gaId = (config as { gaMeasurementId?: string }).gaMeasurementId;
 const gaEnabled = !!gaId && /^G-[A-Z0-9]+$/.test(gaId) && gaId !== "G-XXXXXXXXXX";
 
+// Google Search Console ownership token. Paste the `content` value from the
+// "HTML tag" verification method into site.config.json; leave it empty to omit
+// the tag. Keep it in place after verifying — removing it un-verifies the site.
+const googleSiteVerification = (config as { googleSiteVerification?: string }).googleSiteVerification?.trim();
+
 // BASE_URL is "/" here. Interpolating it and then adding another "/" produced
 // protocol-relative URLs like "//favicon.svg", which browsers resolved as
 // "https://favicon.svg/" — so every icon, the manifest, and the social image
@@ -52,6 +57,8 @@ const organization = {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+
+		{googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
 
 	<link rel="canonical" href={canonical} />
 

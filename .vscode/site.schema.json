@@ -111,6 +111,11 @@
 			"description": "GA4 Measurement ID (e.g. G-XXXXXXXXXX). Leave as G-XXXXXXXXXX or empty to disable analytics.",
 			"type": "string",
 			"pattern": "^(G-[A-Z0-9]+|)$"
+		},
+		"googleSiteVerification": {
+			"title": "Google Search Console Verification Token",
+			"description": "The `content` value from Search Console's \"HTML tag\" verification method. Leave empty to omit the meta tag. Keep it after verifying — removing it un-verifies the site.",
+			"type": "string"
 		}
 	},
 	"required": [
