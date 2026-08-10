@@ -166,6 +166,7 @@ export const people = [
 		research: "He is interested in exploring generative modeling for embodied agents to understand and interact with the world.",
 		links: {
 			email: "zhiyi24@mit.edu",
+			twitter: "https://x.com/ZhiyiLi02",
 		}
 	},
 	{
