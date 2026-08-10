@@ -34,7 +34,7 @@ const scholarly_article = {
 	author: publication.data.authors.map(name => ({ "@type": "Person", name })),
 	datePublished: String(publication.data.year),
 	isPartOf: { "@type": "Periodical", name: publication.data.venue },
-	url: new URL(Astro.url.pathname.replace(/\/+$/, "") || "/", Astro.site).href,
+	url: new URL(Astro.url.pathname.replace(/\/+$/, "") + "/", Astro.site).href,
 	...(publication.data.doi && { identifier: `https://doi.org/${publication.data.doi}` }),
 	...(publication.data.paper && { sameAs: publication.data.paper }),
 	...(publication.data.tags?.length && { keywords: publication.data.tags.join(", ") })

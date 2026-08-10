@@ -41,8 +41,10 @@ const peopleWithImages = people.filter(person => person.image);
 			<div class="people-grid-home">
 				{peopleWithImages.map((person) => {
 					const personId = person.name.toLowerCase().replace(/[^a-z]/g, '');
+					// Append the fragment after the URL, not inside it: with trailingSlash "always",
+					// passing "/people#id" through getRelativeLocaleUrl yields "/people#id/".
 					return (
-					<a href={getRelativeLocaleUrl(locale, `/people#${personId}`)} class="person-square" title={person.name}>
+					<a href={`${getRelativeLocaleUrl(locale, "/people")}#${personId}`} class="person-square" title={person.name}>
 						<img src={`${baseUrl}${person.image.replace(/^\//, '')}`} alt={person.name} loading="lazy" />
 					</a>
 				)})}

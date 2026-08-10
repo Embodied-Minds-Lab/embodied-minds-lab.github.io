@@ -16,9 +16,10 @@ const googleSiteVerification = (config as { googleSiteVerification?: string }).g
 // pointed off-domain. Normalize once, then interpolate without a second slash.
 const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
 
-// Collapse any trailing slash so /people and /people/ share one canonical URL,
-// matching the site's `trailingSlash: "never"` config.
-const canonical = new URL(Astro.url.pathname.replace(/\/+$/, "") || "/", Astro.site);
+// Normalize to exactly one trailing slash, matching both the site's
+// `trailingSlash: "always"` config and what GitHub Pages actually serves — so the
+// canonical URL never points at a URL that redirects.
+const canonical = new URL(Astro.url.pathname.replace(/\/+$/, "") + "/", Astro.site);
 
 const full_title = `${subtitle ? `${subtitle} | ` : ""}${title}`;
 

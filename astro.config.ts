@@ -38,7 +38,11 @@ import reading from "./src/utils/remark/reading";
 export default defineConfig({
   site: "https://embodied-minds-lab.github.io",  // Update this with your actual GitHub Pages URL
   base: "/",  // This is required for GitHub Pages subdirectory deployment
-  trailingSlash: "never",
+  // Must be "always": the build emits directory-style output (people/index.html),
+  // which GitHub Pages can only serve as /people/ — it 301-redirects /people.
+  // With "never", every generated link, sitemap entry, and canonical URL pointed at
+  // the redirecting form, so canonicals referenced a URL that redirected elsewhere.
+  trailingSlash: "always",
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
