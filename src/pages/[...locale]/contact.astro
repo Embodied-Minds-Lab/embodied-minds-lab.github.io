@@ -11,7 +11,9 @@ export async function getStaticPaths() {
 const { locale = i18n!.defaultLocale } = Astro.params;
 const t = i18nit(locale);
 
-// Define opportunities directly in the component for better control
+// Define opportunities directly in the component for better control.
+// This is the source of truth for the contact form URL — src/content/information/en/join-*.md
+// is not rendered anywhere, so keep the two in sync if you edit either.
 const googleFormUrl = "https://forms.gle/1zRJDo72GTnsjHqb6";
 
 const opportunities = [
@@ -54,7 +56,7 @@ const opportunities = [
 	{
 		title: "Visiting Researchers",
 		icon: "lucide:users",
-		description: "We welcome visiting researchers each year. ",
+		description: "We welcome visiting researchers each year.",
 		details: ["While we may not be able to reply to every message, collaborations work best when there is clear overlap with our research and a specific project or idea in mind. Please reach out via the Google Form and we'll get in touch if there's a strong match."],
 		links: [
 			{ text: "Contact via Google Form", url: googleFormUrl }, 

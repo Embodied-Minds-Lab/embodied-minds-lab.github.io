@@ -23,10 +23,27 @@ const { locale = i18n!.defaultLocale } = Astro.params;
 const { publication } = Astro.props;
 
 const t = i18nit(locale);
+
+// Structured data so each paper reads as a citation to search engines and AI
+// retrieval rather than untyped HTML.
+const scholarly_article = {
+	"@context": "https://schema.org",
+	"@type": "ScholarlyArticle",
+	headline: publication.data.title,
+	name: publication.data.title,
+	author: publication.data.authors.map(name => ({ "@type": "Person", name })),
+	datePublished: String(publication.data.year),
+	isPartOf: { "@type": "Periodical", name: publication.data.venue },
+	url: new URL(Astro.url.pathname.replace(/\/+$/, "") || "/", Astro.site).href,
+	...(publication.data.doi && { identifier: `https://doi.org/${publication.data.doi}` }),
+	...(publication.data.paper && { sameAs: publication.data.paper }),
+	...(publication.data.tags?.length && { keywords: publication.data.tags.join(", ") })
+};
 ---
 
 <Base title={publication.data.title} {locale} description={`${publication.data.authors.join(", ")} - ${publication.data.venue} ${publication.data.year}`}>
 	<main class="flex flex-col gap-6">
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(scholarly_article)} />
 		<header class="flex flex-col gap-4">
 			<h1 class="text-3xl">{publication.data.title}</h1>
 			<div class="flex flex-col gap-3 sm:flex-row children:(flex items-center gap-1 text-3.5 c-secondary)">

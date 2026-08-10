@@ -1,19 +1,14 @@
 import type { APIRoute } from "astro";
 
+// Allow every crawler. The previous version allowed only four named bots and
+// served `User-agent: * / Disallow: /` to everyone else, which kept the site out
+// of most search indexes and all AI retrieval.
 export const GET: APIRoute = ({ site }) => {
-	const text = `
-User-agent: Googlebot
-User-agent: Bingbot
-User-agent: DuckDuckBot
-User-agent: archive.org_bot
+	const text = `User-agent: *
 Allow: /
-Disallow: /cdn-cgi
-
-User-agent: *
-Disallow: /
 
 Sitemap: ${new URL("sitemap-index.xml", site)}
 `;
 
-	return new Response(text);
+	return new Response(text, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
 };

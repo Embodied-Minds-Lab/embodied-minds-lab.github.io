@@ -4,32 +4,84 @@ import config from "$config";
 const { title, subtitle, description, author, article } = Astro.props;
 const gaId = (config as { gaMeasurementId?: string }).gaMeasurementId;
 const gaEnabled = !!gaId && /^G-[A-Z0-9]+$/.test(gaId) && gaId !== "G-XXXXXXXXXX";
+
+// BASE_URL is "/" here. Interpolating it and then adding another "/" produced
+// protocol-relative URLs like "//favicon.svg", which browsers resolved as
+// "https://favicon.svg/" — so every icon, the manifest, and the social image
+// pointed off-domain. Normalize once, then interpolate without a second slash.
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
+
+// Collapse any trailing slash so /people and /people/ share one canonical URL,
+// matching the site's `trailingSlash: "never"` config.
+const canonical = new URL(Astro.url.pathname.replace(/\/+$/, "") || "/", Astro.site);
+
+const full_title = `${subtitle ? `${subtitle} | ` : ""}${title}`;
+
+// Social preview image. kempner_harvard.png is a 5417x1459 banner — declaring the
+// real dimensions stops scrapers from guessing while cropping.
+const og_image = new URL(`${baseUrl}kempner_harvard.png`, Astro.site);
+const og_image_width = "5417";
+const og_image_height = "1459";
+
+const locale = Astro.currentLocale ?? "en";
+const og_locale = locale === "en" ? "en_US" : locale.replace("-", "_");
+
+const organization = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: config.title,
+	alternateName: "Embodied Minds Lab",
+	url: Astro.site?.href,
+	logo: new URL(`${baseUrl}logo.png`, Astro.site).href,
+	description: config.description,
+	email: typeof config.author == "string" ? undefined : config.author.email,
+	parentOrganization: {
+		"@type": "CollegeOrUniversity",
+		name: "Harvard University",
+		url: "https://www.harvard.edu/"
+	},
+	sameAs: ["https://kempnerinstitute.harvard.edu/", "https://www.seas.harvard.edu/"]
+};
 ---
 
 <html lang={Astro.currentLocale}>
 	<head>
-		<title>{subtitle && `${subtitle} |`} {title}</title>
+		<title>{full_title}</title>
 		<meta name="description" content={description} />
 
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 
-	<meta property="og:title" content={`${subtitle && `${subtitle} | `}${title}`} />
+	<link rel="canonical" href={canonical} />
+
+	<meta property="og:site_name" content={title} />
+	<meta property="og:title" content={full_title} />
 	<meta property="og:type" content={(article && "article") || "website"} />
-	<meta property="og:image" content={new URL(`${import.meta.env.BASE_URL}/kempner_harvard.png`, Astro.site)} />
+	<meta property="og:image" content={og_image} />
+	<meta property="og:image:width" content={og_image_width} />
+	<meta property="og:image:height" content={og_image_height} />
+	<meta property="og:image:alt" content={title} />
 	<meta property="og:description" content={description} />
-	<meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+	<meta property="og:url" content={canonical} />
+	<meta property="og:locale" content={og_locale} />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={full_title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={og_image} />
+	<meta name="twitter:image:alt" content={title} />
 
 	{article && [<meta property="article:author" content={author} />, <meta property="article:published_time" content={article.timestamp.toISOString()} />, article.section && <meta property="article:section" content={article.section} />, article.tags?.map((tag: string) => <meta property="article:tag" content={tag} />)]}
 
-	<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
-	<link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}/favicon-96x96.png`} sizes="96x96" />
-	<link rel="shortcut icon" href={`${import.meta.env.BASE_URL}/favicon.ico`} />
-	<link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}/apple-touch-icon.png`} />
+	<link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+	<link rel="shortcut icon" href={`${baseUrl}favicon.ico`} />
+	<link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}apple-touch-icon.png`} />
 	<meta name="apple-mobile-web-app-title" content={title} />
-	<link rel="manifest" href={`${import.meta.env.BASE_URL}/site.webmanifest`} />
-	<link rel="sitemap" href={`${import.meta.env.BASE_URL}/sitemap-index.xml`} />
+	<link rel="manifest" href={`${baseUrl}site.webmanifest`} />
+	<link rel="sitemap" href={`${baseUrl}sitemap-index.xml`} />
+
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(organization)} />
 
 		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&family=Noto+Serif:ital,wght@1,200..900&family=Playwrite+MX:wght@100..400&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
 		<link rel="preload" as="style" href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.onload=null;this.rel='stylesheet'" />

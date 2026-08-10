@@ -7,11 +7,11 @@ export const people = [
 		bio: "Yilun Du is an Assistant Professor at Harvard in the Kempner Institute and Computer Science. He received his PhD from MIT EECS, advised by Leslie Kaelbling, Tomas Lozano-Perez, and Joshua B. Tenenbaum. He also holds a bachelor's degree from MIT, was a research fellow at OpenAI and a senior research scientist at Google DeepMind.",
 		research: "His research focuses on developing intelligent embodied agents in the physical world through generative AI, decision making, and robot learning.",
 		links: {
-			website: "https://yilundu.github.io/yilundu.github.io",
+			website: "https://yilundu.github.io/",
 			email: "ydu@seas.harvard.edu",
 			twitter: "https://twitter.com/du_yilun",
 			scholar: "https://scholar.google.com/citations?user=GRMMc_MAAAAJ&hl=en",
-			github: "https://github.com/yilundus"
+			github: "https://github.com/yilundu"
 		}
 	},
 	// Postdocs
@@ -99,10 +99,10 @@ export const people = [
 		position: "PhD Student",
 		image: "/people/chloe.jpg",
 		bio: "Chloe H. Su is a Ph.D. student in Computer Science at Harvard University and a Kempner Graduate Fellow, advised by Prof. Yilun Du and Prof. Sham Kakade. Her work sits at the intersection of robotics, generative models, large language models, and reinforcement learning.",
-		research: "Her research interests lie broadly in robotics, generative models, large language models, and reinforcement learning. She is especially interested in designing algorithms and training paradigms that enable intelligent systems to plan and collaborate effectively, and provide stronger decision-making. More broadly, She aims to develop AI systems that are reliable, adaptive, and capable of operating in complex real-world environments.",
+		research: "Her research interests lie broadly in robotics, generative models, large language models, and reinforcement learning. She is especially interested in designing algorithms and training paradigms that enable intelligent systems to plan and collaborate effectively, and provide stronger decision-making. More broadly, she aims to develop AI systems that are reliable, adaptive, and capable of operating in complex real-world environments.",
 		links: {
 			website: "https://hither1.github.io/",
-			email: "sliaw@g.harvard.edu",
+			email: "csu@g.harvard.edu",
 			twitter: "https://x.com/Huangyu58589918",
 			scholar: "https://scholar.google.com/citations?user=aSLeTLEAAAAJ&hl=en&oi=ao",
 			github: "https://github.com/Hither1"
@@ -116,7 +116,7 @@ export const people = [
         research: "His research focuses on generative models, 3D generalization, and their applications to embodied intelligence and robotics.",
         links: {
             website: "https://amani-kiruga.github.io/",
-            email: "akiruga@udel.edu",
+            email: "akiruga@fas.harvard.edu",
             scholar: "https://scholar.google.com/citations?user=5o-60kkAAAAJ&hl=en",
             github: "https://github.com/amanikiruga"
         }
@@ -211,8 +211,8 @@ export const people = [
 		name: "Lillian Sun",
 		position: "Undergraduate Researcher",
 		image: "/people/lillian.jpg",
-		bio: "Lillian Sun is an undergraduate student at Harvard studying CS and Statistics, along with a concurrent Masters in CS. Her research focuses on improving communication between models in multi-agent systems. She is interested in using synthetic data for self-improvement and designing incentives for robustness and alignment.",
-		research: "Research interests and focus areas.",
+		bio: "Lillian Sun is an undergraduate student at Harvard studying CS and Statistics, along with a concurrent Master's in CS.",
+		research: "Her research focuses on improving communication between models in multi-agent systems. She is interested in using synthetic data for self-improvement and designing incentives for robustness and alignment.",
 		links: {
 			email: "lilliansun@college.harvard.edu",
 			twitter: "https://x.com/LillianSun496", // optional

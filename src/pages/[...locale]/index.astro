@@ -6,7 +6,6 @@ import { Icon } from "astro-icon/components";
 import Time from "$utils/time";
 import Base from "$layouts/Base.astro";
 import config from "$config";
-import i18nit from "$i18n";
 import { people } from "$data/people";
 
 export async function getStaticPaths() {
@@ -16,7 +15,6 @@ export async function getStaticPaths() {
 
 const { locale = i18n!.defaultLocale } = Astro.params;
 
-const t = i18nit(locale);
 const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 
 // Get preface content, sorted by timestamp (newest first)
@@ -36,7 +34,8 @@ const { Content } = preface ? await render(preface) : ({} as any);
 const peopleWithImages = people.filter(person => person.image);
 ---
 
-<Base title={t("navigation.home")} {locale}>
+{/* No `title` prop: the homepage <title> should be just the lab name, not "Home | …". */}
+<Base {locale}>
 	<main class="flex flex-col gap-5 sm:gap-10 flex-grow">
 		<header class="flex items-center justify-center grow-0.6">
 			<div class="people-grid-home">
