@@ -1,0 +1,144 @@
+---
+import { i18n } from "astro:config/client";
+import { getCollection, render } from "astro:content";
+import Base from "$layouts/Base.astro";
+
+export async function getStaticPaths() {
+	return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+}
+
+const { locale = i18n!.defaultLocale } = Astro.params;
+
+const information = await getCollection("information", information => {
+	const [, id] = information.id.split("/");
+	information.id = id;
+	return true;
+});
+
+let startup = information.find(info => info.id == "lab-startup");
+
+const { Content } = startup ? await render(startup) : ({} as any);
+---
+
+<Base title="New Member Info" {locale}>
+	<main class="flex flex-col grow startup-page">
+		<h1 class="page-title">New Member Info</h1>
+
+		<section class="intro-section">
+			<p class="intro-text">
+				The Embodied Minds Lab uses computing resources provisioned by FASRC. To prevent over-usage and keep
+				things fair for all lab members, please follow the guidelines below.
+			</p>
+		</section>
+
+		{
+			startup && (
+				<div class="markdown startup-content">
+					<Content />
+				</div>
+			)
+		}
+	</main>
+</Base>
+
+<style>
+	.startup-page {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		width: 100%;
+	}
+
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--primary-color);
+		margin-bottom: 2rem;
+		text-align: center;
+	}
+
+	.intro-section {
+		text-align: center;
+		margin-bottom: 2.5rem;
+		padding: 2rem;
+		background: var(--block-color);
+		border-radius: 8px;
+		border: 1px solid var(--shadow-color);
+	}
+
+	.intro-text {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--primary-color);
+		margin: 0;
+	}
+
+	/* Calm the blog-post markdown defaults into a quiet document hierarchy. */
+	.startup-content :global(h2) {
+		align-self: stretch;
+		border-bottom: 1px solid var(--shadow-color);
+		padding-bottom: 0.4rem;
+		margin-top: 2.5rem;
+		font-size: 1.35rem;
+		font-weight: 600;
+	}
+
+	/* Headings wrap their text in an anchor, so color both. */
+	.startup-content :global(h2),
+	.startup-content :global(h2 a) {
+		color: #a51c30;
+	}
+
+	.startup-content :global(section:first-of-type h2) {
+		margin-top: 0;
+	}
+
+	/* .markdown and its sections are flex columns, and flex items default to
+	   min-width: auto — so a long command line forces the whole page wider
+	   instead of scrolling. min-width: 0 lets them shrink and scroll instead. */
+	.startup-content :global(> *),
+	.startup-content :global(section > *) {
+		min-width: 0;
+		max-width: 100%;
+	}
+
+	.startup-content :global(pre) {
+		border: 1px solid var(--shadow-color);
+		border-radius: 6px;
+		overflow-x: auto;
+	}
+
+	.startup-content :global(table) {
+		width: 100%;
+		border-top: 1px solid var(--shadow-color);
+		border-bottom: 1px solid var(--shadow-color);
+		text-align: left;
+	}
+
+	.startup-content :global(th) {
+		font-weight: 600;
+		border-bottom: 1px solid var(--shadow-color);
+	}
+
+	.startup-content :global(a) {
+		color: #a51c30;
+	}
+
+	@media (max-width: 768px) {
+		.startup-page {
+			padding: 0 1rem;
+		}
+
+		.page-title {
+			font-size: 2rem;
+		}
+
+		.intro-section {
+			padding: 1.5rem;
+		}
+
+		.intro-text {
+			font-size: 1rem;
+		}
+	}
+</style>
