@@ -28,7 +28,9 @@ Check it with `sshare --account=ydu_lab -a`.
 
 Keep heavy I/O on netscratch. Running it against `$HOME` or lab storage slows the cluster for everyone.
 
+<!-- Hidden for now. To restore, delete the comment markers around this paragraph.
 Netscratch deletion is based on modification time, so `touch` will reset the clock on a file you still need. Use this **sparingly**: the space is shared, and anything parked there indefinitely is space the rest of the lab cannot use.
+-->
 
 To store a large dataset permanently, contact Yilun. If the dataset is important and likely useful to many labs, he can approve you to request that Kempner host it in their testbed at `/n/holylfs06/LABS/kempner_shared/Everyone/testbed`, which is shared across the Kempner community.
 
@@ -45,7 +47,7 @@ A batch job on requeue, resuming from its last checkpoint:
 ```bash
 #!/bin/bash
 #SBATCH --job-name=my_job
-#SBATCH --account=ydu_lab
+#SBATCH --account=kempner_ydu_lab
 #SBATCH --partition=kempner_requeue
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16
@@ -60,7 +62,7 @@ python train.py --resume-from-checkpoint latest
 An interactive session:
 
 ```bash
-salloc --account=ydu_lab --partition=kempner_requeue --gres=gpu:1 --mem=64G --time=04:00:00
+salloc --account=kempner_ydu_lab --partition=kempner_requeue --gres=gpu:1 --mem=64G --time=04:00:00
 ```
 
 Day to day:
