@@ -23,12 +23,16 @@ Check it with `sshare --account=ydu_lab -a`.
 | Path | Use it for | Notes |
 | --- | --- | --- |
 | `$HOME` | code and configs | 100 GB, backed up |
-| `/n/lab_storage/ydu_lab` | datasets and results worth keeping | 100 TB, shared across the lab |
-| `/n/netscratch/ydu_lab` | active training I/O | 50 TB, fast, **deleted after 90 days** |
+| `/n/lab_storage/ydu_lab` | code and small essential datasets | 100 TB, shared across the lab |
+| `/n/netscratch/ydu_lab` | large datasets, results, wandb logs, intensive I/O | 50 TB, fast, **deleted after 90 days** |
 
 Keep heavy I/O on netscratch. Running it against `$HOME` or lab storage slows the cluster for everyone.
 
 Netscratch deletion is based on modification time, so `touch` will reset the clock on a file you still need. Use this **sparingly**: the space is shared, and anything parked there indefinitely is space the rest of the lab cannot use.
+
+To store a large dataset permanently, contact Yilun. If the dataset is important and likely useful to many labs, he can approve you to request that Kempner host it in their testbed at `/n/holylfs06/LABS/kempner_shared/Everyone/testbed`, which is shared across the Kempner community.
+
+If you need a large dataset for only a short time, talk to Yilun about acquiring temporary netscratch storage.
 
 ## Lab dashboard
 
