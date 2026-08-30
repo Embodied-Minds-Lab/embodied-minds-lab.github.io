@@ -22,35 +22,6 @@
 	}
 }
 
-	/* Standalone call-to-action, offset from the four primary nav items. */
-	.member-info {
-		display: inline-block;
-
-		p {
-			padding: 6px 14px;
-			border-radius: 4px;
-
-			font-size: 0.95rem;
-			font-weight: 600;
-			white-space: nowrap;
-			text-align: center;
-
-			color: #fffffd;
-			background-color: #a51c30;
-			transition: background-color 0.15s ease, box-shadow 0.15s ease;
-		}
-
-		&:hover p {
-			background-color: #8a1728;
-		}
-
-		&.location p {
-			background-color: #7a1423;
-			font-weight: 700;
-			box-shadow: inset 0 0 0 2px #5c0f1a;
-		}
-	}
-
 @media screen and (max-width: 640px) {
 		nav {
 			header {
@@ -82,7 +53,7 @@
 <div role="button" onclick={() => (menu = false)} class:pointer-events-none={!menu} class:bg-transparent={!menu} class="fixed top-0 left-0 w-screen h-screen pointer-events-auto bg-#aaaaaa88 transition-background-color sm:hidden"></div>
 
 <nav bind:this={navigator} class:transform-translate-x-full={!menu} class="fixed top-0 right-0 flex flex-col justify-between items-start gap-5 p-5 bg-background h-full sm:contents overflow-hidden transition-transform">
-    <header class="grid gap-5 c-secondary grid-rows-[repeat(6,1fr)] sm:(grid-rows-none grid-cols-[repeat(5,1fr)])">
+    <header class="grid gap-5 c-secondary grid-rows-[repeat(5,1fr)] sm:(grid-rows-none grid-cols-[repeat(4,1fr)])">
 		<button onclick={() => (menu = false)} class="sm:hidden">{@render close()}</button>
 
 		<a href={getUrl("/")} class:location={route == getUrl("/") || route.startsWith(getUrl("/preface"))}>
@@ -96,9 +67,6 @@
         </a>
         <a href={getUrl("/contact")} class:location={route.startsWith(getUrl("/contact"))}>
 			<p>{t("navigation.join") || "Contact"}</p>
-		</a>
-		<a href={getUrl("/lab-startup")} class="member-info" class:location={route.startsWith(getUrl("/lab-startup"))}>
-			<p>{t("navigation.startup") || "New Member Info"}</p>
 		</a>
 	</header>
 
