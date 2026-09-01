@@ -2,8 +2,6 @@
 import { i18n } from "astro:config/client";
 import { render, getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { Icon } from "astro-icon/components";
-import Time from "$utils/time";
 import Base from "$layouts/Base.astro";
 import config from "$config";
 import { people } from "$data/people";
@@ -57,9 +55,6 @@ const peopleWithImages = people.filter(person => person.image);
 					<article class="markdown">
 						<Content />
 					</article>
-					<a href={getRelativeLocaleUrl(locale, "/preface")} class="self-end my-2 text-size-sm c-secondary">
-						—— {Time.date.locale(preface.data.timestamp, locale)}
-					</a>
 				</section>
 			)
 		}

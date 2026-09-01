@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Icon from "$components/Icon.astro";
 import i18nit from "$i18n";
@@ -65,12 +65,6 @@ if (copyright.type === "CC0 1.0") {
 	if (copyright.type.includes("ND")) CC_icons.push("fa6-brands:creative-commons-nd"); // No derivatives
 }
 
-// Calculate total word count from publications
-const publications = await getCollection("publications", publication => !publication.data.draft);
-const publication_words = (await Promise.all(publications.map(async publication => (await render(publication)).remarkPluginFrontmatter.words))).reduce((summary, words) => summary + words, 0);
-
-const total_words = publication_words;
-
 // Check if policy file exists for current locale
 const information = await getCollection("information", information => {
 	const [language, id] = information.id.split("/");
@@ -106,8 +100,6 @@ const policy = information.some(info => info.id == "policy");
 		<a target="_blank" href={CC_URL} aria-label={CC_label} class="flex items-center gap-1">
 			{CC_icons.map(icon => <Icon name={icon} />)}
 		</a>
-		<span>·</span>
-		<span class="contents"><Icon name="lucide:activity" title={t("statistics", { words: total_words })} /></span>
 		{
 			policy && [
 				<span>·</span>,
@@ -120,11 +112,4 @@ const policy = information.some(info => info.id == "policy");
 	<div class="flex justify-center flex-shrink-0">
 		<img src={`${baseUrl}kempner_harvard.png`} alt="Kempner Institute and Harvard University" class="h-20 sm:h-18" />
 	</div>
-	<code class="flex items-center gap-2.5">
-		<p>Powered by</p>
-		<a href="https://astro.build/" aria-label="Astro" target="_blank" class="inline-flex"><Icon name="simple-icons:astro" /></a>
-		<a href="https://svelte.dev/" aria-label="Svelte" target="_blank" class="inline-flex"><Icon name="simple-icons:svelte" /></a>
-		<span>·</span>
-		<a href="https://github.com/tuyuritio/astro-theme-thought-lite" aria-label="Theme" target="_blank" class="inline-flex"><Icon name="simple-icons:github" title={t("theme")} inline /></a>
-	</code>
 </footer>
