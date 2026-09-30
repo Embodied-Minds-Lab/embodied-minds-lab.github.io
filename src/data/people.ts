@@ -194,31 +194,6 @@ export const people = [
 			email: "zoewu@g.harvard.edu",
 		}
 	},
-	// Undergraduate Researchers
-	{
-		name: "Runqian Wang",
-		position: "Undergraduate Researcher",
-		image: "/people/runqian.jpg",
-		bio: "Runqian Wang is an undergraduate student at MIT double majoring in AI and Math. He is currently a visiting researcher working with Yilun.",
-		research: "His focus is on generative modeling, particularly image and video generation. He is most interested in simple yet effective methods that can generalize.",
-		links: {
-			website: "https://raywang4.github.io/",
-			email: "raywang4@mit.edu",
-			scholar: "https://scholar.google.com/citations?user=KuFJC30AAAAJ&hl=en",
-			github: "https://github.com/raywang4"
-		}
-	},
-	{
-		name: "Lillian Sun",
-		position: "Undergraduate Researcher",
-		image: "/people/lillian.jpg",
-		bio: "Lillian Sun is an undergraduate student at Harvard studying CS and Statistics, along with a concurrent Master's in CS.",
-		research: "Her research focuses on improving communication between models in multi-agent systems. She is interested in using synthetic data for self-improvement and designing incentives for robustness and alignment.",
-		links: {
-			email: "lilliansun@college.harvard.edu",
-			twitter: "https://x.com/LillianSun496", // optional
-		}
-	},
 	// Visiting Researchers
 	// {
 	// 	name: "Jiawei Gao",
