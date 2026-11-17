@@ -41,17 +41,17 @@ export const people = [
 		}
 	},
 	{
-		name: "Anand Gopalakrishnan",
+		name: "Kaichen Zhou",
 		position: "Postdoc",
-		image: "/people/anand.jpg",
-		bio: "Anand Gopalakrishnan is a Postdoctoral Fellow in AI and Cognitive Science jointly advised by Yilun Du and Samuel Gershman at Harvard University. He received his PhD in Informatics from USI Lugano (Switzerland) advised by Jürgen Schmidhuber.",
-		research: "Anand's research is broadly centered around deep learning and representation learning with a focus on modularity and compositionality. Psychological studies, cognitive and neuroscientific theories on human perception like attentional gaze, saliency, object perception, binding, relational reasoning, categorization etc. inform his design of computational models. He is deeply fascinated by both natural and artificial intelligence and wishes to distill the essential computational principles from the human mind to build more human-like AI.",
+		image: "/people/kaichen.jpg",
+		bio: "Kaichen is a postdoctoral researcher at Harvard University and the MIT Media Lab, jointly supervised by Yilun Du, Paul Liang, and Mengyu Wang. He earned his Ph.D. in Computer Science from the University of Oxford and graduated with First Class Honours (top 10%) from the Department of Computing at Imperial College London.",
+		research: "Kaichen studies how embodied agents understand the physical world, predict how it evolves, and learn through interaction. His research spans dynamic 3D perception, memory and geometric consistency in world models, and robot learning from multimodal feedback and execution experience.",
 		links: {
-			website: "https://agopal42.github.io/",
-			email: "anand_gopalakrishnan@g.harvard.edu",
-			twitter: "https://twitter.com/agopal42",
-			scholar: "https://scholar.google.com/citations?user=SsbgJ1UAAAAJ&hl=en",
-			github: "https://github.com/agopal42"
+			website: "https://kaichen-z.github.io/",
+			email: "kzhou6@meei.harvard.edu",
+			twitter: "https://x.com/alex_kai2020",
+			scholar: "https://scholar.google.com/citations?hl=en&user=8S6_34oAAAAJ&view_op=list_works&sortby=pubdate",
+			github: "https://github.com/kaichen-z"
 		}
 	},
 	// PhD Students

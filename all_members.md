@@ -9,7 +9,7 @@ A record of everyone who has been listed on the People page, including former me
 | Yilun Du | Principal Investigator | ydu@seas.harvard.edu | https://yilundu.github.io/ |
 | Ruojin Cai | Kempner Research Fellow | rcai@fas.harvard.edu | https://ruojincai.github.io/ |
 | Haonan Chen | Postdoc | haonan_chen@seas.harvard.edu | https://haonan16.github.io |
-| Anand Gopalakrishnan | Postdoc | anand_gopalakrishnan@g.harvard.edu | https://agopal42.github.io/ |
+| Kaichen Zhou | Postdoc | kzhou6@meei.harvard.edu | https://kaichen-z.github.io/ |
 | Zhenting Qi | PhD Student | zhentingqi@g.harvard.edu | https://zhentingqi.github.io/ |
 | Haldun Balim | PhD Student | hbalim@fas.harvard.edu | https://haldunbalim.github.io |
 | Sarah Liaw | PhD Student | sliaw@g.harvard.edu | https://sarahliaw.github.io |
@@ -26,6 +26,7 @@ A record of everyone who has been listed on the People page, including former me
 
 | Name | Position (while in lab) | Email | Website |
 | --- | --- | --- | --- |
+| Anand Gopalakrishnan | Postdoc | anand_gopalakrishnan@g.harvard.edu | https://agopal42.github.io/ |
 | Runqian (Ray) Wang | Undergraduate Researcher | raywang4@mit.edu | https://raywang4.github.io/ |
 | Lillian Sun | Undergraduate Researcher | lilliansun@college.harvard.edu | |
 | Jiawei Gao | Visiting Researcher | jiawei_gao@seas.harvard.edu | https://gao-jiawei.com/ |
